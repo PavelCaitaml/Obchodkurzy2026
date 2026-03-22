@@ -185,13 +185,44 @@ body,html{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink)}
 <body>
   <div id="root"></div>
 
-  <!-- React + Babel (standalone, no build needed) -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    window.fbApp = { initializeApp };
+    window.fbStore = { getFirestore, doc, setDoc, onSnapshot };
+    window.dispatchEvent(new Event('firebase-loaded'));
+  </script>
+
   <script type="text/babel" data-presets="react">
-const { useState, useMemo, useCallback } = React;
+const { useState, useMemo, useCallback, useEffect, useRef } = React;
+
+
+// ─── FIREBASE ────────────────────────────────────────────────────────────────
+const { initializeApp } = window.fbApp;
+const { getFirestore, doc, setDoc, onSnapshot } = window.fbStore;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD7vvJXGvAdfhFU5a_biqS3eOiLle2zk3Y",
+  authDomain: "crm-obchod1.firebaseapp.com",
+  projectId: "crm-obchod1",
+  storageBucket: "crm-obchod1.firebasestorage.app",
+  messagingSenderId: "195690446189",
+  appId: "1:195690446189:web:ae8a33e9d916fd967cee64"
+};
+
+const fbInstance = initializeApp(firebaseConfig);
+const db = getFirestore(fbInstance);
+
+async function saveState(data) {
+  try { await setDoc(doc(db, "crm", "state"), data); }
+  catch(e) { console.error("Save failed:", e); }
+}
+
+
 
 const MANAGER_PASSWORD = "Pecka1234"
 const MGR_KEY = "crm_manager_auth"
@@ -6380,14 +6411,39 @@ function CRM() {
   const [managerAuthed,setMgrAuth] = useState(()=>{try{return localStorage.getItem(MGR_KEY)==="1"}catch{return false}})
   const [salespeople,setSP]        = useState(INIT_SP)
   const [orgOverrides,setOrgOv]    = useState({})
-  const [customOrgs,setCustomOrgs] = useState([
-    {id:"o1",organization:"ZŠ Lipová",contact:"Jana Malinová",phone:"777 123 456",email:"j@zslipova.cz",type:"ZŠ",kraj:"",okres:"",population:0,assignedTo:null,addedBy:null},
-    {id:"o2",organization:"SŠ Technická",contact:"Karel Štěpán",phone:"604 987 654",email:"k@sstechnicka.cz",type:"SŠ",kraj:"",okres:"",population:0,assignedTo:null,addedBy:null},
-  ])
+  const [customOrgs,setCustomOrgs] = useState([])
   const [interactions,setIx]       = useState([])
   const [trainings,setTrainings]   = useState([])
   const [orgRequests,setOrgReqs]   = useState([])
   const [showAddSp,setShowAddSp]   = useState(false)
+  const [dbLoading,setDbLoading]   = useState(true)
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "crm", "state"), (snap) => {
+      if (snap.exists()) {
+        const d = snap.data();
+        if (d.salespeople && d.salespeople.length) setSP(d.salespeople);
+        if (d.orgOverrides) setOrgOv(d.orgOverrides);
+        if (d.customOrgs) setCustomOrgs(d.customOrgs);
+        if (d.interactions) setIx(d.interactions);
+        if (d.trainings) setTrainings(d.trainings);
+        if (d.orgRequests) setOrgReqs(d.orgRequests);
+      }
+      setDbLoading(false);
+    }, (err) => { console.error(err); setDbLoading(false); });
+    return () => unsub();
+  }, []);
+
+  const saveTimer = useRef(null);
+  const firstRun = useRef(true);
+  useEffect(() => {
+    if (firstRun.current) { firstRun.current = false; return; }
+    if (dbLoading) return;
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      saveState({ salespeople, orgOverrides, customOrgs, interactions, trainings, orgRequests });
+    }, 1000);
+  }, [salespeople, orgOverrides, customOrgs, interactions, trainings, orgRequests]);
 
   const resolveOrg = useCallback((org)=>{
     const ov=orgOverrides[org.id]; return ov?{...org,...ov}:org
@@ -6406,6 +6462,14 @@ function CRM() {
   const addSP = sp=>{setSP(p=>[...p,{...sp,id:"sp"+uid()}]);setShowAddSp(false)}
   const spPending = spId=>customOrgs.filter(o=>o.assignedTo===spId&&o.addedBy!==spId).length+Object.values(orgOverrides).filter(ov=>ov.assignedTo===spId&&!ov.addedBy).length
   const hasReq = spId=>orgRequests.some(r=>r.spId===spId)
+
+  if (dbLoading) return (
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",fontFamily:"Sora,sans-serif",flexDirection:"column",gap:16,background:"#F4F2EE"}}>
+      <div style={{fontSize:48}}>◆</div>
+      <div style={{fontSize:18,fontWeight:700,color:"#0F0E0C"}}>CRM Systém</div>
+      <div style={{fontSize:14,color:"#9E9A93"}}>Načítám data...</div>
+    </div>
+  );
 
   return(<>
     
@@ -6953,8 +7017,16 @@ function AssignTab({salespeople,customOrgs,setCustomOrgs,orgOverrides,setOrgAssi
 }
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(CRM));
+window.addEventListener('firebase-loaded', () => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(React.createElement(CRM));
+}, {once: true});
+
+// fallback if event already fired
+if (window.fbApp) {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(React.createElement(CRM));
+}
   </script>
 </body>
 </html>
