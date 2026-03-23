@@ -11,7 +11,7 @@
 :root{
   --ink:#0F0E0C;--bg:#F4F2EE;--card:#fff;--border:#E2DED6;
   --muted:#9E9A93;--green:#2D6A4F;--green-l:#DCFCE7;
-  --red:#DC2626;--amber:#D97706;--blue:#2563EB;
+  --red:#DC2626;--amber:#D97706;--blue:#2563EB;--purple:#7C3AED;
   --sh:0 1px 3px rgba(0,0,0,.06),0 6px 20px rgba(0,0,0,.05);
 }
 body,html{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink)}
@@ -24,6 +24,7 @@ body,html{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink)}
 .btn-nav{background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.7);padding:6px 12px;border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;cursor:pointer;transition:.15s}
 .btn-nav:hover{background:rgba(255,255,255,.2);color:#fff}
 .btn-nav.active{background:#fff;color:var(--ink);font-weight:600}
+.notif-dot{background:var(--red);color:#fff;border-radius:20px;font-size:10px;font-weight:700;padding:1px 6px;margin-left:4px}
 .home-wrap{padding:44px 32px;max-width:1000px;margin:0 auto;width:100%}
 .home-title{font-size:30px;font-weight:700;margin-bottom:5px}
 .home-sub{color:var(--muted);font-size:14px;margin-bottom:34px}
@@ -39,16 +40,15 @@ body,html{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink)}
 .mgr-card:hover{border-color:#333}
 .add-sp-card{border-style:dashed;color:var(--muted)}
 .add-sp-card:hover{border-color:var(--green);color:var(--green);background:#F0FBF5}
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:400;display:flex;align-items:center;justify-content:center;padding:20px}
-.modal{background:var(--card);border-radius:18px;padding:32px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:20px}
-.modal-actions{display:flex;gap:10px;margin-top:20px}
-.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:var(--card);border-radius:18px;padding:28px;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.2);max-height:90vh;overflow-y:auto}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:18px}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:13px}
 .emoji-opt{font-size:22px;padding:6px;border:2px solid transparent;border-radius:8px;cursor:pointer;text-align:center;transition:.15s}
-.emoji-opt:hover{border-color:var(--green)}
-.emoji-opt.picked{border-color:var(--green);background:var(--green-l)}
-.color-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.color-opt{width:28px;height:28px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:.15s}
+.emoji-opt:hover,.emoji-opt.picked{border-color:var(--green);background:var(--green-l)}
+.color-grid{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px}
+.color-opt{width:26px;height:26px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:.15s}
 .color-opt.picked{border-color:var(--ink);transform:scale(1.15)}
 .login-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px}
 .login-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:48px 40px;width:100%;max-width:380px;box-shadow:var(--sh);text-align:center}
@@ -67,143 +67,203 @@ body,html{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .btn-green{padding:9px 14px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
 .btn-green:hover{background:#235a42}
+.btn-red{padding:9px 14px;background:var(--red);color:#fff;border:none;border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
+.btn-red:hover{background:#b91c1c}
 .btn-ghost{padding:9px 14px;background:transparent;color:var(--muted);border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
 .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
 .btn-sm{padding:5px 10px;border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;background:var(--card);white-space:nowrap;transition:.15s}
 .btn-sm:hover{background:var(--bg)}
 .btn-sm.green{background:var(--green);color:#fff;border-color:var(--green)}
 .btn-sm.red{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-sm.amber{background:var(--amber);color:#fff;border-color:var(--amber)}
 .sec-hd{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
-.profile-wrap{display:grid;grid-template-columns:290px 1fr;height:calc(100vh - 54px)}
-.profile-left{background:var(--card);border-right:1px solid var(--border);padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:18px}
-.profile-right{overflow-y:auto;padding:22px 26px;display:flex;flex-direction:column;gap:13px}
-.profile-hd{text-align:center;padding:10px 0 4px}
-.p-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 9px}
-.p-name{font-size:16px;font-weight:700;margin-bottom:2px}
-.p-stat-row{display:flex;justify-content:center;gap:12px;margin-top:8px}
+
+/* PROFILE */
+.profile-wrap{display:grid;grid-template-columns:270px 1fr;height:calc(100vh - 54px)}
+.profile-left{background:var(--card);border-right:1px solid var(--border);padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+.profile-right{overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:12px}
+.profile-hd{text-align:center;padding:8px 0 4px}
+.p-avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 8px}
+.p-name{font-size:15px;font-weight:700;margin-bottom:2px}
+.p-stat-row{display:flex;justify-content:center;gap:10px;margin-top:7px}
 .pstat{text-align:center}
-.pstat-val{font-size:19px;font-weight:700}
+.pstat-val{font-size:18px;font-weight:700}
 .pstat-lbl{font-size:9px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
-.add-form{display:flex;flex-direction:column;gap:7px}
-.btn-request{width:100%;padding:11px;background:var(--red);color:#fff;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.add-form{display:flex;flex-direction:column;gap:6px}
+.btn-request{width:100%;padding:10px;background:var(--red);color:#fff;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
 .btn-request:hover{background:#b91c1c}
-.req-notification{background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:12px 14px}
-.req-notification-title{font-size:12px;font-weight:700;color:var(--red);margin-bottom:6px}
-.req-item{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;font-size:12px}
-.org-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh)}
-.org-head{padding:12px 15px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;cursor:pointer;transition:.15s}
+.req-notification{background:#FEF2F2;border:1.5px solid #FECACA;border-radius:10px;padding:10px 12px}
+.req-notification-title{font-size:11px;font-weight:700;color:var(--red);margin-bottom:5px}
+.req-item{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;font-size:11px}
+
+/* FOLDER TABS */
+.folder-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.folder-tab{padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;background:var(--card);transition:.15s;display:flex;align-items:center;gap:5px}
+.folder-tab:hover{border-color:var(--ink)}
+.folder-tab.active{color:#fff;border-color:transparent}
+.folder-count{background:rgba(255,255,255,.25);border-radius:20px;padding:0 5px;font-size:10px}
+
+/* ORG CARD */
+.org-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh);transition:.15s}
+.org-card:hover{border-color:var(--green)}
+.org-head{padding:12px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;cursor:pointer;transition:.15s}
 .org-head:hover{background:#fafaf8}
 .org-org{font-size:13px;font-weight:700}
-.org-meta{font-size:10px;color:var(--muted);margin-top:3px;display:flex;gap:7px;flex-wrap:wrap}
+.org-meta{font-size:10px;color:var(--muted);margin-top:3px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
 .sbadge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600}
-.org-actions{padding:11px 15px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--border)}
-.btn-act{padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:.15s;background:var(--card)}
-.btn-act:hover{border-color:var(--ink);background:var(--bg)}
-.a-interest{background:var(--green-l)!important;border-color:#16A34A!important;color:#15803D!important}
-.a-no{background:#FEE2E2!important;border-color:var(--red)!important;color:var(--red)!important}
-.a-post{background:#FEF3C7!important;border-color:var(--amber)!important;color:var(--amber)!important}
-.a-email{background:#DBEAFE!important;border-color:var(--blue)!important;color:var(--blue)!important}
-.train-box{padding:11px 15px;border-top:1px solid var(--border)}
-.train-title{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
-.train-row{display:flex;gap:6px;align-items:center;margin-bottom:7px}
-.train-entry{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 11px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
+.org-body{border-top:1px solid var(--border)}
+
+/* ORG DETAIL TABS */
+.org-detail-tabs{display:flex;border-bottom:1px solid var(--border);background:#fafaf8}
+.odt{padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);transition:.15s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Sora',sans-serif;white-space:nowrap}
+.odt.active{border-bottom-color:var(--green);color:var(--ink);background:var(--card)}
+.org-tab-content{padding:14px}
+
+/* STATUS BUTTONS */
+.status-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.btn-status{padding:7px 11px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;cursor:pointer;transition:.15s;background:var(--card)}
+.btn-status:hover{border-color:var(--ink);background:var(--bg)}
+.s-interest{background:var(--green-l)!important;border-color:#16A34A!important;color:#15803D!important}
+.s-no{background:#FEE2E2!important;border-color:var(--red)!important;color:var(--red)!important}
+.s-post{background:#FEF3C7!important;border-color:var(--amber)!important;color:var(--amber)!important}
+.s-email{background:#DBEAFE!important;border-color:var(--blue)!important;color:var(--blue)!important}
+.s-nokontakt{background:#F3F4F6!important;border-color:#6B7280!important;color:#374151!important}
+.s-termin{background:#EDE9FE!important;border-color:var(--purple)!important;color:var(--purple)!important}
+
+/* TRAINING */
+.train-box{margin-top:10px}
+.train-title{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.train-entry{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 11px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
 .train-entry.done{background:#DCFCE7;border-color:#86EFAC}
 .train-date{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500}
 .done-b{background:#16A34A;color:#fff;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700}
 .pend-b{background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
-.asgn-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:12px}
-.asgn-tab{padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);transition:.15s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Sora',sans-serif}
-.asgn-tab.active{border-bottom-color:var(--green);color:var(--ink)}
-.section-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:var(--sh)}
-.mgr-wrap{padding:26px 30px;max-width:1200px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:20px}
+
+/* NOTES */
+.notes-area{width:100%;min-height:100px;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;outline:none;resize:vertical;background:#fafaf8;transition:.15s;line-height:1.5}
+.notes-area:focus{border-color:var(--green);background:#fff}
+
+/* TASKS */
+.task-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 11px;display:flex;align-items:center;gap:8px;margin-bottom:5px;transition:.15s}
+.task-item.overdue{background:#FEF2F2;border-color:#FECACA}
+.task-item.done-task{opacity:.55}
+.task-check{width:16px;height:16px;border-radius:4px;border:2px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;transition:.15s}
+.task-check.checked{background:var(--green);border-color:var(--green);color:#fff}
+.task-text{flex:1;font-size:12px}
+.task-text.done-task{text-decoration:line-through;color:var(--muted)}
+.task-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap}
+.task-date.overdue{color:var(--red);font-weight:600}
+
+/* NOTIFICATIONS */
+.notif-banner{background:#FEF3C7;border:1.5px solid #FCD34D;border-radius:12px;padding:12px 16px;margin-bottom:4px}
+.notif-banner-title{font-size:12px;font-weight:700;color:#92400E;margin-bottom:6px}
+.notif-item{font-size:11px;color:#92400E;padding:3px 0;border-bottom:1px solid #FDE68A;display:flex;align-items:center;gap:6px}
+.notif-item:last-child{border:none}
+
+/* WEB LINK */
+.web-link{display:inline-flex;align-items:center;gap:4px;color:var(--blue);font-size:11px;text-decoration:none;padding:3px 8px;border:1px solid #DBEAFE;border-radius:6px;background:#EFF6FF;transition:.15s}
+.web-link:hover{background:#DBEAFE}
+
+/* MANAGER */
+.mgr-wrap{padding:24px 28px;max-width:1200px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:18px}
 .mgr-tabs{display:flex;gap:7px;flex-wrap:wrap}
-.tab-btn{padding:8px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;cursor:pointer;background:var(--card);transition:.15s}
+.tab-btn{padding:8px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;background:var(--card);transition:.15s}
 .tab-btn:hover{border-color:var(--ink)}
 .tab-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px}
-.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--sh)}
-.kpi-val{font-size:26px;font-weight:700;margin-bottom:2px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:9px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 15px;box-shadow:var(--sh)}
+.kpi-val{font-size:24px;font-weight:700;margin-bottom:2px}
 .kpi-lbl{font-size:10px;color:var(--muted)}
 .data-table{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh)}
 .dt-head{display:grid;padding:9px 16px;background:var(--bg);border-bottom:1px solid var(--border);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);gap:8px}
-.dt-row{display:grid;padding:11px 16px;border-bottom:1px solid var(--border);gap:8px;align-items:center;font-size:13px;transition:.12s}
+.dt-row{display:grid;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px;align-items:center;font-size:12px;transition:.12s}
 .dt-row:last-child{border-bottom:none}
 .dt-row:hover{background:#fafaf8}
-.assign-layout{display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start}
-.assign-pool{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--sh)}
-.filters-row{display:flex;gap:7px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
-.search-wrap{position:relative;flex:1;min-width:160px}
-.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none}
-.search-inp{width:100%;padding:7px 9px 7px 28px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:12px;outline:none;background:var(--bg);transition:.15s}
+.assign-layout{display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start}
+.assign-pool{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--sh)}
+.filters-row{display:flex;gap:6px;margin-bottom:7px;flex-wrap:wrap;align-items:center}
+.search-wrap{position:relative;flex:1;min-width:140px}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;pointer-events:none}
+.search-inp{width:100%;padding:7px 9px 7px 27px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;outline:none;background:var(--bg);transition:.15s}
 .search-inp:focus{border-color:var(--green);background:#fff}
-.filter-sel{padding:7px 9px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;background:var(--bg);outline:none;cursor:pointer;max-width:140px}
-.assign-item{padding:8px 10px;border:1.5px solid var(--border);border-radius:7px;margin-bottom:4px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
+.filter-sel{padding:6px 8px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sora',sans-serif;font-size:11px;background:var(--bg);outline:none;cursor:pointer}
+.assign-item{padding:7px 9px;border:1.5px solid var(--border);border-radius:7px;margin-bottom:4px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:6px}
 .assign-item:hover{border-color:var(--green);background:#F0FBF5}
 .assign-item.sel{border-color:var(--green);background:#DCFCE7}
-.assign-item-check{width:15px;height:15px;border-radius:3px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;transition:.15s}
+.assign-item-check{width:14px;height:14px;border-radius:3px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;transition:.15s}
 .assign-item.sel .assign-item-check{background:var(--green);border-color:var(--green);color:#fff}
 .ai-main{font-weight:600;font-size:11px;flex:1}
-.ai-sub{font-size:10px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;margin-top:1px}
-.ai-pop{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue)}
-.assign-right{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--sh);position:sticky;top:20px}
-.sp-pick{padding:9px 11px;border:1.5px solid var(--border);border-radius:8px;margin-bottom:6px;cursor:pointer;transition:.15s;font-size:13px;display:flex;align-items:center;gap:8px}
+.ai-sub{font-size:9px;color:var(--muted);display:flex;gap:5px;flex-wrap:wrap;margin-top:1px}
+.assign-right{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--sh);position:sticky;top:20px}
+.sp-pick{padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;margin-bottom:5px;cursor:pointer;transition:.15s;font-size:12px;display:flex;align-items:center;gap:7px}
 .sp-pick:hover{border-color:var(--green)}
 .sp-pick.sel{border-color:var(--green);background:var(--green-l)}
-.sel-summary{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 11px;margin-bottom:10px;font-size:11px;color:var(--muted)}
-.sel-summary b{color:var(--ink)}
-.funnel-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.funnel-bar{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px;text-align:center;box-shadow:var(--sh)}
-.funnel-val{font-size:24px;font-weight:700;margin-bottom:2px}
+.funnel-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:9px}
+.funnel-bar{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;box-shadow:var(--sh)}
+.funnel-val{font-size:22px;font-weight:700;margin-bottom:2px}
 .funnel-lbl{font-size:10px;color:var(--muted)}
-.sp-report{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;box-shadow:var(--sh)}
-.sp-report-name{font-size:14px;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px}
-.stat-chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px}
-.stat-chip{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
-.act-list{font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:3px;max-height:110px;overflow-y:auto}
-.act-item{display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid var(--border)}
+.sp-report{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--sh)}
+.sp-report-name{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.stat-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.stat-chip{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.act-list{font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:3px;max-height:100px;overflow-y:auto}
+.act-item{display:flex;align-items:center;gap:5px;padding:2px 0;border-bottom:1px solid var(--border)}
 .act-item:last-child{border:none}
-.tmgr-item{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:11px 15px;box-shadow:var(--sh);cursor:pointer;transition:.15s}
-.tmgr-item:hover{border-color:var(--green)}
+.tmgr-item{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;box-shadow:var(--sh);cursor:pointer;transition:.15s}
+.tmgr-item:hover,.tmgr-item.expanded-t{border-color:var(--green)}
 .tmgr-item.done-t{border-color:#86EFAC;background:#F0FDF4}
-.tmgr-item.expanded-t{border-color:var(--green)}
-.tmgr-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.tmgr-org{font-size:13px;font-weight:700}
-.tmgr-meta{font-size:11px;color:var(--muted);margin-top:2px}
-.tmgr-detail{padding-top:12px;margin-top:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px}
-.empty-s{text-align:center;padding:50px 20px;color:var(--muted)}
-.empty-icon{font-size:38px;margin-bottom:10px}
-.tag-type{padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600;background:#F3F4F6;color:#374151}
+.tmgr-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tmgr-org{font-size:12px;font-weight:700}
+.tmgr-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.tmgr-detail{padding-top:10px;margin-top:10px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
+.empty-s{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-icon{font-size:34px;margin-bottom:8px}
+.tag-type{padding:2px 6px;border-radius:20px;font-size:9px;font-weight:600;background:#F3F4F6;color:#374151}
 .tag-obec{background:#EFF6FF;color:#1D4ED8}
-.virtual-list{overflow-y:auto;max-height:440px}
-.vl-info{font-size:11px;color:var(--muted);margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
-.pagination{display:flex;gap:6px;margin-top:10px;align-items:center;justify-content:center}
+.virtual-list{overflow-y:auto;max-height:400px}
+.vl-info{font-size:10px;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between}
+.pagination{display:flex;gap:5px;margin-top:8px;align-items:center;justify-content:center}
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--sh)}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
   </style>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script>
-    firebase.initializeApp({
-      apiKey: "AIzaSyD7vvJXGvAdfhFU5a_biqS3eOiLle2zk3Y",
-      authDomain: "crm-obchod1.firebaseapp.com",
-      projectId: "crm-obchod1",
-      storageBucket: "crm-obchod1.firebasestorage.app",
-      messagingSenderId: "195690446189",
-      appId: "1:195690446189:web:ae8a33e9d916fd967cee64"
-    });
-  </script>
 </head>
 <body>
   <div id="root"></div>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    window.fbApp = { initializeApp };
+    window.fbStore = { getFirestore, doc, setDoc, onSnapshot };
+    window.dispatchEvent(new Event('fb-ready'));
+  </script>
   <script type="text/babel" data-presets="react">
 const { useState, useMemo, useCallback, useEffect, useRef } = React;
 
-const MANAGER_PASSWORD = "Pecka1234"
-const MGR_KEY = "crm_manager_auth"
+
+// ─── FIREBASE ────────────────────────────────────────────────────────────────
+const { initializeApp } = window.fbApp;
+const { getFirestore, doc, setDoc, onSnapshot } = window.fbStore;
+
+const fbInstance = initializeApp({
+  apiKey: "AIzaSyD7vvJXGvAdfhFU5a_biqS3eOiLle2zk3Y",
+  authDomain: "crm-obchod1.firebaseapp.com",
+  projectId: "crm-obchod1",
+  storageBucket: "crm-obchod1.firebasestorage.app",
+  messagingSenderId: "195690446189",
+  appId: "1:195690446189:web:ae8a33e9d916fd967cee64"
+});
+window._db = getFirestore(fbInstance);
+window._fbDoc = doc;
+window._fbSetDoc = setDoc;
+window._fbOnSnapshot = onSnapshot;
+
+
+
 const SP_EMOJIS = ["🦊","🐯","🦁","🐻","🦋","🌸","⚡","🎯","🔥","🌟","💎","🚀"]
 const SP_COLORS = ["#2D6A4F","#1D4ED8","#7C3AED","#DB2777","#D97706","#0891B2","#059669","#DC2626","#6D28D9","#B45309"]
 const INIT_SP = [
@@ -217,18 +277,13 @@ const INIT_SP = [
   {id:"sp8",name:"Pavel",emoji:"🎯",color:"#059669"},
   {id:"sp9",name:"Barča",emoji:"🐻",color:"#6D28D9"},
 ]
-const STATUS_META = {
-  interest:    {label:"Zájem",         color:"#16A34A",bg:"#DCFCE7",icon:"✅"},
-  no_interest: {label:"Nezájem",       color:"#DC2626",bg:"#FEE2E2",icon:"❌"},
-  postponed:   {label:"Odložený zájem",color:"#D97706",bg:"#FEF3C7",icon:"⏳"},
-  emailed:     {label:"Email odeslán", color:"#2563EB",bg:"#DBEAFE",icon:"📧"},
-}
 const ORG_TYPES = ["ZŠ","SŠ","MŠ","MŠ+ZŠ","ZŠ+SŠ","Obec","Ostatní"]
 const ALL_KRAJE = ["Hlavní město Praha", "Jihomoravský kraj", "Jihočeský kraj", "Karlovarský kraj", "Kraj Vysočina", "Královéhradecký kraj", "Liberecký kraj", "Moravskoslezský kraj", "Olomoucký kraj", "Pardubický kraj", "Plzeňský kraj", "Středočeský kraj", "Zlínský kraj", "Ústecký kraj"]
 const ALL_OKRESY = ["Benešov", "Beroun", "Blansko", "Brno-město", "Brno-venkov", "Bruntál", "Břeclav", "Cheb", "Chomutov", "Chrudim", "Domažlice", "Děčín", "Frýdek-Místek", "Havlíčkův Brod", "Hodonín", "Hradec Králové", "Jablonec nad Nisou", "Jeseník", "Jihlava", "Jindřichův Hradec", "Jičín", "Karlovy Vary", "Karviná", "Kladno", "Klatovy", "Kolín", "Kroměříž", "Kutná Hora", "Liberec", "Litoměřice", "Louny", "Mladá Boleslav", "Most", "Mělník", "Nový Jičín", "Nymburk", "Náchod", "Olomouc", "Opava", "Ostrava-město", "Pardubice", "Pelhřimov", "Plzeň-jih", "Plzeň-město", "Plzeň-sever", "Prachatice", "Praha", "Praha-východ", "Prostějov", "Písek", "Přerov", "Rokycany", "Rychnov nad Kněžnou", "Semily", "Sokolov", "Strakonice", "Svitavy", "Tachov", "Teplice", "Trutnov", "Tábor", "Třebíč", "Uherské Hradiště", "Vsetín", "Vyškov", "Zlín", "Znojmo", "Ústí nad Labem", "Ústí nad Orlicí", "Česká Lípa", "České Budějovice", "Český Krumlov", "Šumperk", "Žďár nad Sázavou"]
 const todayStr   = () => new Date().toISOString().split("T")[0]
 const todayLabel = () => new Date().toLocaleDateString("cs-CZ",{weekday:"long",day:"numeric",month:"long",year:"numeric"})
 const uid        = () => Math.random().toString(36).slice(2,9)
+
 
 const ALL_ORGS_DB = [
 {id:'db1',organization:'ARCHA základní škola a mateřská škola při Církvi československé husitské',contact:'Mgr. Jitka Hřebecká',phone:'311440246',email:'skolaarcha@skolaarcha.org',type:'MŠ+ZŠ',kraj:'',okres:'',population:0,assignedTo:null,addedBy:null},
@@ -6380,123 +6435,160 @@ const ALL_ORGS_DB = [
 ]
 
 
-// ─── CSS ──────────────────────────────────────────────────────────────────────
 const CSS = ""
 
-// ─── APP ──────────────────────────────────────────────────────────────────────
+// ─── STATUS CONFIG ────────────────────────────────────────────────────────────
+const STATUS_META = {
+  interest:    {label:"Zájem",          color:"#16A34A",bg:"#DCFCE7",icon:"✅",folder:"zájem"},
+  no_interest: {label:"Nezájem",        color:"#DC2626",bg:"#FEE2E2",icon:"❌",folder:"nezájem"},
+  postponed:   {label:"Odložený zájem", color:"#D97706",bg:"#FEF3C7",icon:"⏳",folder:"odloženo"},
+  emailed:     {label:"Email odeslán",  color:"#2563EB",bg:"#DBEAFE",icon:"📧",folder:"email"},
+  no_contact:  {label:"Nekontaktovat",  color:"#6B7280",bg:"#F3F4F6",icon:"🚫",folder:"nekontaktovat"},
+  termin:      {label:"Má termín",      color:"#7C3AED",bg:"#EDE9FE",icon:"📅",folder:"termín"},
+}
+
+const FOLDERS = [
+  {id:"all",     label:"Všechny",      color:"#0F0E0C", icon:"📋"},
+  {id:"zajem",   label:"Zájem",        color:"#16A34A", icon:"✅"},
+  {id:"termin",  label:"Má termín",    color:"#7C3AED", icon:"📅"},
+  {id:"odlozeno",label:"Odloženo",     color:"#D97706", icon:"⏳"},
+  {id:"email",   label:"Email",        color:"#2563EB", icon:"📧"},
+  {id:"nezajem", label:"Nezájem",      color:"#DC2626", icon:"❌"},
+  {id:"nekontaktovat",label:"Nekontaktovat",color:"#6B7280",icon:"🚫"},
+  {id:"nove",    label:"Nové",         color:"#9E9A93", icon:"🆕"},
+]
+
+const STATUS_TO_FOLDER = {
+  interest:"zajem", no_interest:"nezajem", postponed:"odlozeno",
+  emailed:"email",  no_contact:"nekontaktovat", termin:"termin",
+}
+
+const todayStr   = () => new Date().toISOString().split("T")[0]
+const todayLabel = () => new Date().toLocaleDateString("cs-CZ",{weekday:"long",day:"numeric",month:"long",year:"numeric"})
+const uid        = () => Math.random().toString(36).slice(2,9)
+
+// Firebase helpers (injected at runtime)
+async function saveState(data) {
+  try { await window._fbSetDoc(window._fbDoc(window._db,"crm","state"), data); }
+  catch(e) { console.error("Save:", e); }
+}
+
 function CRM() {
   const [view,setView]             = useState("home")
-  const [managerAuthed,setMgrAuth] = useState(()=>{try{return localStorage.getItem(MGR_KEY)==="1"}catch{return false}})
+  const [managerAuthed,setMgrAuth] = useState(()=>{try{return localStorage.getItem("crm_mgr")==="1"}catch{return false}})
   const [salespeople,setSP]        = useState(INIT_SP)
   const [orgOverrides,setOrgOv]    = useState({})
   const [customOrgs,setCustomOrgs] = useState([])
   const [interactions,setIx]       = useState([])
   const [trainings,setTrainings]   = useState([])
   const [orgRequests,setOrgReqs]   = useState([])
+  const [notes,setNotes]           = useState({})   // {orgId: string}
+  const [tasks,setTasks]           = useState([])   // [{id,orgId,spId,text,date,done,createdAt}]
+  const [orgDetails,setOrgDetails] = useState({})   // {orgId: {requirements, courseDays}}
   const [showAddSp,setShowAddSp]   = useState(false)
-  const [dbReady,setDbReady]       = useState(false)
-  const saveTimer                  = useRef(null)
-  const firstRun                   = useRef(true)
+  const [dbLoading,setDbLoading]   = useState(true)
 
   useEffect(() => {
-    try {
-      const db = firebase.firestore()
-      const ref = db.collection("crm").doc("state")
-      const unsub = ref.onSnapshot((snap) => {
-        if (snap.exists) {
-          const d = snap.data()
-          if (d.salespeople && d.salespeople.length) setSP(d.salespeople)
-          if (d.orgOverrides) setOrgOv(d.orgOverrides)
-          if (d.customOrgs) setCustomOrgs(d.customOrgs)
-          if (d.interactions) setIx(d.interactions)
-          if (d.trainings) setTrainings(d.trainings)
-          if (d.orgRequests) setOrgReqs(d.orgRequests)
-        }
-        setDbReady(true)
-      }, (err) => {
-        console.error("Firestore error:", err)
-        setDbReady(true)
-      })
-      return () => unsub()
-    } catch(e) {
-      console.error("Firebase init error:", e)
-      setDbReady(true)
-    }
-  }, [])
+    if (!window._db) { setDbLoading(false); return; }
+    const unsub = window._fbOnSnapshot(window._fbDoc(window._db,"crm","state"), (snap) => {
+      if (snap.exists()) {
+        const d = snap.data();
+        if (d.salespeople?.length) setSP(d.salespeople);
+        if (d.orgOverrides) setOrgOv(d.orgOverrides);
+        if (d.customOrgs) setCustomOrgs(d.customOrgs);
+        if (d.interactions) setIx(d.interactions);
+        if (d.trainings) setTrainings(d.trainings);
+        if (d.orgRequests) setOrgReqs(d.orgRequests);
+        if (d.notes) setNotes(d.notes);
+        if (d.tasks) setTasks(d.tasks);
+        if (d.orgDetails) setOrgDetails(d.orgDetails);
+      }
+      setDbLoading(false);
+    }, () => setDbLoading(false));
+    return () => unsub();
+  }, []);
 
+  const saveTimer = useRef(null);
+  const firstRun  = useRef(true);
   useEffect(() => {
     if (firstRun.current) { firstRun.current = false; return; }
-    if (!dbReady) return
-    clearTimeout(saveTimer.current)
+    if (dbLoading) return;
+    clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
-      try {
-        firebase.firestore().collection("crm").doc("state").set({
-          salespeople, orgOverrides, customOrgs, interactions, trainings, orgRequests
-        })
-      } catch(e) { console.error("Save error:", e) }
-    }, 1000)
-  }, [salespeople, orgOverrides, customOrgs, interactions, trainings, orgRequests])
+      saveState({salespeople,orgOverrides,customOrgs,interactions,trainings,orgRequests,notes,tasks,orgDetails});
+    }, 1200);
+  }, [salespeople,orgOverrides,customOrgs,interactions,trainings,orgRequests,notes,tasks,orgDetails]);
 
   const resolveOrg = useCallback((org)=>{
-    const ov=orgOverrides[org.id]; return ov?{...org,...ov}:org
-  },[orgOverrides])
-  const setOrgAssigned = (id,spId)=>setOrgOv(p=>({...p,[id]:{...(p[id]||{}),assignedTo:spId}}))
-  const setOrgAddedBy  = (id,spId)=>setOrgOv(p=>({...p,[id]:{...(p[id]||{}),addedBy:spId,assignedTo:spId}}))
+    const ov=orgOverrides[org.id]; return ov?{...org,...ov}:org;
+  },[orgOverrides]);
+  const setOrgAssigned = (id,spId)=>setOrgOv(p=>({...p,[id]:{...(p[id]||{}),assignedTo:spId}}));
+  const setOrgAddedBy  = (id,spId)=>setOrgOv(p=>({...p,[id]:{...(p[id]||{}),addedBy:spId,assignedTo:spId}}));
 
-  const go = setView
-  const currentSpId = view.startsWith("sp:") ? view.replace("sp:","") : null
-  const currentSp   = salespeople.find(s=>s.id===currentSpId)
+  const go = setView;
+  const currentSpId = view.startsWith("sp:") ? view.replace("sp:","") : null;
+  const currentSp   = salespeople.find(s=>s.id===currentSpId);
 
-  const authManager = pw=>{
-    if(pw===MANAGER_PASSWORD){setMgrAuth(true);try{localStorage.setItem(MGR_KEY,"1")}catch{};go("manager");return true}
-    return false
-  }
-  const addSP = sp=>{setSP(p=>[...p,{...sp,id:"sp"+uid()}]);setShowAddSp(false)}
-  const spPending = spId=>customOrgs.filter(o=>o.assignedTo===spId&&o.addedBy!==spId).length+Object.values(orgOverrides).filter(ov=>ov.assignedTo===spId&&!ov.addedBy).length
-  const hasReq = spId=>orgRequests.some(r=>r.spId===spId)
+  const authManager = pw => {
+    if (pw==="Pecka1234") {
+      setMgrAuth(true); try{localStorage.setItem("crm_mgr","1")}catch{};
+      go("manager"); return true;
+    }
+    return false;
+  };
+  const addSP = sp=>{setSP(p=>[...p,{...sp,id:"sp"+uid()}]);setShowAddSp(false);};
 
-  if (!dbReady) return (
-    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",fontFamily:"Sora,sans-serif",flexDirection:"column",gap:16,background:"#0F0E0C"}}>
-      <div style={{fontSize:48,color:"#fff"}}>◆</div>
-      <div style={{fontSize:18,fontWeight:700,color:"#fff"}}>CRM Systém</div>
+  // Overdue tasks count per sp
+  const overdueCount = spId => {
+    const today = todayStr();
+    return tasks.filter(t=>t.spId===spId&&!t.done&&t.date&&t.date<today).length;
+  };
+  const spPending = spId=>customOrgs.filter(o=>o.assignedTo===spId&&o.addedBy!==spId).length+Object.values(orgOverrides).filter(ov=>ov.assignedTo===spId&&!ov.addedBy).length;
+  const hasReq    = spId=>orgRequests.some(r=>r.spId===spId);
+
+  if (dbLoading) return (
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",fontFamily:"Sora,sans-serif",flexDirection:"column",gap:16,background:"#F4F2EE"}}>
+      <div style={{fontSize:48}}>◆</div>
+      <div style={{fontSize:18,fontWeight:700}}>CRM Systém</div>
       <div style={{fontSize:13,color:"#9E9A93"}}>Načítám data...</div>
     </div>
-  )
+  );
 
   return(<>
-    
+    <style>{CSS}</style>
     <div className="crm">
       <div className="topbar">
         <div className="topbar-brand" onClick={()=>go("home")}>◆ CRM Systém <span className="pill">OBCHOD</span></div>
-        <div style={{display:"flex",gap:6}}>
+        <div style={{display:"flex",gap:6,alignItems:"center"}}>
           <button className={`btn-nav ${view==="home"?"active":""}`} onClick={()=>go("home")}>← Domů</button>
           {managerAuthed
             ?<button className={`btn-nav ${view==="manager"?"active":""}`} onClick={()=>go("manager")}>🧑‍💼 Manažer</button>
             :<button className={`btn-nav ${view==="manager_login"?"active":""}`} onClick={()=>go("manager_login")}>🔐 Manažer</button>}
         </div>
       </div>
-      {view==="home"&&<HomeScreen salespeople={salespeople} go={go} managerAuthed={managerAuthed} spPending={spPending} hasReq={hasReq} onAddSp={()=>setShowAddSp(true)}/>}
+      {view==="home"&&<HomeScreen salespeople={salespeople} go={go} managerAuthed={managerAuthed} spPending={spPending} hasReq={hasReq} overdueCount={overdueCount} onAddSp={()=>setShowAddSp(true)}/>}
       {view==="manager_login"&&<ManagerLogin authManager={authManager}/>}
       {view==="manager"&&managerAuthed&&<ManagerDashboard salespeople={salespeople} customOrgs={customOrgs} setCustomOrgs={setCustomOrgs} orgOverrides={orgOverrides} setOrgAssigned={setOrgAssigned} interactions={interactions} trainings={trainings} setTrainings={setTrainings} orgRequests={orgRequests} setOrgRequests={setOrgReqs} resolveOrg={resolveOrg}/>}
-      {currentSp&&<SalespersonProfile sp={currentSp} salespeople={salespeople} customOrgs={customOrgs} setCustomOrgs={setCustomOrgs} orgOverrides={orgOverrides} setOrgAddedBy={setOrgAddedBy} interactions={interactions} setInteractions={setIx} trainings={trainings} setTrainings={setTrainings} orgRequests={orgRequests} setOrgRequests={setOrgReqs} resolveOrg={resolveOrg}/>}
+      {currentSp&&<SalespersonProfile sp={currentSp} salespeople={salespeople} customOrgs={customOrgs} setCustomOrgs={setCustomOrgs} orgOverrides={orgOverrides} setOrgAddedBy={setOrgAddedBy} interactions={interactions} setInteractions={setIx} trainings={trainings} setTrainings={setTrainings} orgRequests={orgRequests} setOrgRequests={setOrgReqs} notes={notes} setNotes={setNotes} tasks={tasks} setTasks={setTasks} orgDetails={orgDetails} setOrgDetails={setOrgDetails} resolveOrg={resolveOrg}/>}
       {showAddSp&&<AddSpModal onAdd={addSP} onClose={()=>setShowAddSp(false)}/>}
     </div>
-  </>)
+  </>);
 }
 
-function HomeScreen({salespeople,go,managerAuthed,spPending,hasReq,onAddSp}){
+function HomeScreen({salespeople,go,managerAuthed,spPending,hasReq,overdueCount,onAddSp}){
   return(<div className="screen"><div className="home-wrap">
     <div className="home-title">Kdo jste?</div>
     <div className="home-sub">Klikněte na svůj profil pro přístup k pracovní ploše.</div>
     <div className="sp-grid">
-      {salespeople.map(sp=>(
-        <div key={sp.id} className="sp-card" onClick={()=>go(`sp:${sp.id}`)}>
-          {(spPending(sp.id)>0||hasReq(sp.id))&&<div className="sp-req-dot"/>}
+      {salespeople.map(sp=>{
+        const od=overdueCount(sp.id);
+        return(<div key={sp.id} className="sp-card" onClick={()=>go(`sp:${sp.id}`)}>
+          {(spPending(sp.id)>0||hasReq(sp.id)||od>0)&&<div className="sp-req-dot"/>}
           <div className="sp-emoji">{sp.emoji}</div>
           <div className="sp-name">{sp.name}</div>
-          <div className="sp-role">Obchodník</div>
-        </div>
-      ))}
+          <div className="sp-role">Obchodník{od>0&&<span style={{color:"var(--red)",fontWeight:700,marginLeft:4}}>⚠️{od}</span>}</div>
+        </div>);
+      })}
       <div className="sp-card mgr-card" onClick={()=>managerAuthed?go("manager"):go("manager_login")}>
         <div className="sp-emoji">🧑‍💼</div><div className="sp-name">Manažer</div>
         <div className="sp-role">{managerAuthed?"Přihlášen ✓":"Vyžaduje heslo"}</div>
@@ -6506,150 +6598,301 @@ function HomeScreen({salespeople,go,managerAuthed,spPending,hasReq,onAddSp}){
         <div className="sp-role">Nový obchodník</div>
       </div>
     </div>
-  </div></div>)
+  </div></div>);
 }
 
 function AddSpModal({onAdd,onClose}){
-  const [name,setName]=useState("")
-  const [emoji,setEmoji]=useState(SP_EMOJIS[0])
-  const [color,setColor]=useState(SP_COLORS[0])
-  return(<div className="modal-bg" onClick={onClose}>
-    <div className="modal" onClick={e=>e.stopPropagation()}>
-      <div className="modal-title">➕ Nový obchodník</div>
-      <div className="sec-hd">Jméno</div>
-      <input className="inp" style={{marginBottom:14}} placeholder="Jméno / přezdívka" value={name} onChange={e=>setName(e.target.value)}/>
-      <div className="sec-hd">Emoji</div>
-      <div className="emoji-grid">{SP_EMOJIS.map(e=><div key={e} className={`emoji-opt ${emoji===e?"picked":""}`} onClick={()=>setEmoji(e)}>{e}</div>)}</div>
-      <div className="sec-hd">Barva</div>
-      <div className="color-grid">{SP_COLORS.map(c=><div key={c} className={`color-opt ${color===c?"picked":""}`} style={{background:c}} onClick={()=>setColor(c)}/>)}</div>
-      <div className="modal-actions">
-        <button className="btn-ghost" onClick={onClose}>Zrušit</button>
-        <button className="btn-green" style={{flex:1}} onClick={()=>{if(name.trim())onAdd({name:name.trim(),emoji,color})}}>Přidat</button>
-      </div>
+  const [name,setName]=useState(""); const [emoji,setEmoji]=useState(SP_EMOJIS[0]); const [color,setColor]=useState(SP_COLORS[0]);
+  return(<div className="modal-bg" onClick={onClose}><div className="modal" onClick={e=>e.stopPropagation()}>
+    <div className="modal-title">➕ Nový obchodník</div>
+    <div className="sec-hd">Jméno</div>
+    <input className="inp" style={{marginBottom:12}} placeholder="Jméno" value={name} onChange={e=>setName(e.target.value)}/>
+    <div className="sec-hd">Emoji</div>
+    <div className="emoji-grid">{SP_EMOJIS.map(e=><div key={e} className={`emoji-opt ${emoji===e?"picked":""}`} onClick={()=>setEmoji(e)}>{e}</div>)}</div>
+    <div className="sec-hd">Barva</div>
+    <div className="color-grid">{SP_COLORS.map(c=><div key={c} className={`color-opt ${color===c?"picked":""}`} style={{background:c}} onClick={()=>setColor(c)}/>)}</div>
+    <div className="modal-actions">
+      <button className="btn-ghost" onClick={onClose}>Zrušit</button>
+      <button className="btn-green" style={{flex:1}} onClick={()=>{if(name.trim())onAdd({name:name.trim(),emoji,color})}}>Přidat</button>
     </div>
-  </div>)
+  </div></div>);
 }
 
 function ManagerLogin({authManager}){
-  const [pw,setPw]=useState("")
-  const [err,setErr]=useState(false)
-  const submit=()=>{if(!authManager(pw))setErr(true)}
+  const [pw,setPw]=useState(""); const [err,setErr]=useState(false);
+  const submit=()=>{if(!authManager(pw))setErr(true);};
   return(<div className="screen login-wrap"><div className="login-box">
     <div className="login-icon">🔐</div>
     <div className="login-title">Přihlášení manažera</div>
-    <div className="login-sub">Zadejte heslo pro přístup k manažerskému profilu.</div>
-    <input className="login-input" type="password" placeholder="Heslo…" value={pw} onChange={e=>{setPw(e.target.value);setErr(false)}} onKeyDown={e=>e.key==="Enter"&&submit()}/>
+    <div className="login-sub">Zadejte heslo pro přístup.</div>
+    <input className="login-input" type="password" placeholder="Heslo…" value={pw} onChange={e=>{setPw(e.target.value);setErr(false);}} onKeyDown={e=>e.key==="Enter"&&submit()}/>
     {err&&<div className="login-error">❌ Nesprávné heslo</div>}
     <button className="btn-primary" onClick={submit}>Přihlásit se</button>
-  </div></div>)
+  </div></div>);
 }
 
-function SalespersonProfile({sp,salespeople,customOrgs,setCustomOrgs,orgOverrides,setOrgAddedBy,interactions,setInteractions,trainings,setTrainings,orgRequests,setOrgRequests,resolveOrg}){
-  const [expandedOrg,setExpOrg]=useState(null)
-  const [tab,setTab]=useState("assigned")
-  const [addForm,setAddForm]=useState({organization:"",contact:"",phone:"",email:"",type:"",note:""})
-  const [trainInputs,setTrainInputs]=useState({})
+// ─── SALESPERSON PROFILE ──────────────────────────────────────────────────────
+function SalespersonProfile({sp,salespeople,customOrgs,setCustomOrgs,orgOverrides,setOrgAddedBy,interactions,setInteractions,trainings,setTrainings,orgRequests,setOrgRequests,notes,setNotes,tasks,setTasks,orgDetails,setOrgDetails,resolveOrg}){
+  const [activeFolder,setFolder] = useState("all")
+  const [expandedOrg,setExpOrg]  = useState(null)
+  const [activeOrgTab,setOrgTab] = useState({})  // {orgId: tab}
+  const [addForm,setAddForm]     = useState({organization:"",contact:"",phone:"",email:"",type:"",web:""})
+  const [editOrg,setEditOrg]     = useState(null)  // org being edited
+  const [newTaskText,setNTT]     = useState({})
+  const [newTaskDate,setNTD]     = useState({})
+  const [trainInputs,setTrIn]    = useState({})
 
-  const myCustom    = customOrgs.filter(o=>o.addedBy===sp.id)
-  const asgCustom   = customOrgs.filter(o=>o.assignedTo===sp.id&&o.addedBy!==sp.id)
-  const asgDB       = Object.entries(orgOverrides).filter(([id,ov])=>ov.assignedTo===sp.id&&!ov.addedBy).map(([id])=>{const b=ALL_ORGS_DB.find(o=>o.id===id);return b?resolveOrg(b):null}).filter(Boolean)
-  const myDB        = Object.entries(orgOverrides).filter(([id,ov])=>ov.addedBy===sp.id).map(([id])=>{const b=ALL_ORGS_DB.find(o=>o.id===id);return b?resolveOrg(b):null}).filter(Boolean)
+  const myCustom  = customOrgs.filter(o=>o.addedBy===sp.id)
+  const asgCustom = customOrgs.filter(o=>o.assignedTo===sp.id&&o.addedBy!==sp.id)
+  const asgDB     = Object.entries(orgOverrides).filter(([id,ov])=>ov.assignedTo===sp.id&&!ov.addedBy).map(([id])=>{const b=ALL_ORGS_DB.find(o=>o.id===id);return b?resolveOrg(b):null}).filter(Boolean)
+  const myDB      = Object.entries(orgOverrides).filter(([id,ov])=>ov.addedBy===sp.id).map(([id])=>{const b=ALL_ORGS_DB.find(o=>o.id===id);return b?resolveOrg(b):null}).filter(Boolean)
+  const allMy     = [...myCustom,...myDB]
+  const allAsgn   = [...asgCustom,...asgDB]
+  const myIx      = interactions.filter(i=>i.spId===sp.id)
+  const myReqs    = orgRequests.filter(r=>r.spId===sp.id)
+  const today     = todayStr()
 
-  const allAsgn = [...asgCustom,...asgDB]
-  const allMy   = [...myCustom,...myDB]
-  const myIx    = interactions.filter(i=>i.spId===sp.id)
-  const myReqs  = orgRequests.filter(r=>r.spId===sp.id)
+  // Overdue tasks notification
+  const overdueTasks = tasks.filter(t=>t.spId===sp.id&&!t.done&&t.date&&t.date<today)
+  const todayTasks   = tasks.filter(t=>t.spId===sp.id&&!t.done&&t.date===today)
 
-  const interests = myIx.filter(i=>i.status==="interest").length
-  const noInt     = myIx.filter(i=>i.status==="no_interest").length
-  const postponed = myIx.filter(i=>i.status==="postponed").length
+  const getStatus = orgId => {
+    const ix=interactions.filter(i=>i.orgId===orgId&&i.spId===sp.id&&i.date===today)
+    return ix.find(i=>Object.keys(STATUS_META).includes(i.status))?.status||null
+  }
+  const getAllTimeStatus = orgId => {
+    const ix=[...interactions].filter(i=>i.orgId===orgId&&i.spId===sp.id).sort((a,b)=>b.date>a.date?1:-1)
+    return ix.find(i=>Object.keys(STATUS_META).includes(i.status))?.status||null
+  }
+
+  const setStatus=(orgId,status)=>{
+    setInteractions(p=>[...p.filter(i=>!(i.orgId===orgId&&i.spId===sp.id&&i.date===today&&Object.keys(STATUS_META).includes(i.status))),{id:Date.now(),orgId,spId:sp.id,status,date:today}])
+  }
 
   const addOrg=()=>{
     if(!addForm.organization.trim())return
     setCustomOrgs(db=>[...db,{id:"u"+uid(),...addForm,kraj:"",okres:"",population:0,assignedTo:sp.id,addedBy:sp.id}])
-    setAddForm({organization:"",contact:"",phone:"",email:"",type:"",note:""})
-    setTab("my")
+    setAddForm({organization:"",contact:"",phone:"",email:"",type:"",web:""})
   }
+  const deleteOrg=id=>{
+    setCustomOrgs(db=>db.filter(o=>o.id!==id))
+    setOrgAddedBy(id,null)  // won't help for DB orgs but that's ok
+    setExpOrg(null)
+  }
+  const deleteCustomOrg=id=>{
+    setCustomOrgs(db=>db.filter(o=>o.id!==id))
+    setExpOrg(null)
+  }
+  const updateCustomOrg=(id,patch)=>setCustomOrgs(db=>db.map(o=>o.id===id?{...o,...patch}:o))
+
   const claimCustom=id=>setCustomOrgs(db=>db.map(o=>o.id===id?{...o,addedBy:sp.id}:o))
   const claimDB=id=>setOrgAddedBy(id,sp.id)
-  const sendReq=()=>{if(myReqs.length>0)return;setOrgRequests(p=>[...p,{id:uid(),spId:sp.id,spName:sp.name,spEmoji:sp.emoji,date:todayStr()}])}
+  const sendReq=()=>{if(myReqs.length>0)return;setOrgRequests(p=>[...p,{id:uid(),spId:sp.id,spName:sp.name,spEmoji:sp.emoji,date:today}])}
 
-  const getStatus=orgId=>{
-    const today=todayStr()
-    const ix=interactions.filter(i=>i.orgId===orgId&&i.spId===sp.id&&i.date===today)
-    return{status:ix.find(i=>["interest","no_interest","postponed"].includes(i.status))?.status||null,emailed:!!ix.find(i=>i.status==="emailed")}
-  }
-  const setStatus=(orgId,status)=>{
-    const today=todayStr()
-    setInteractions(p=>[...p.filter(i=>!(i.orgId===orgId&&i.spId===sp.id&&i.date===today&&["interest","no_interest","postponed"].includes(i.status))),{id:Date.now(),orgId,spId:sp.id,status,date:today}])
-  }
-  const sendEmail=orgId=>{
-    const today=todayStr()
-    if(interactions.find(i=>i.orgId===orgId&&i.spId===sp.id&&i.status==="emailed"&&i.date===today))return
-    setInteractions(p=>[...p,{id:Date.now(),orgId,spId:sp.id,status:"emailed",date:today}])
-  }
   const addTraining=orgId=>{
-    const inp=trainInputs[orgId]||{}
-    if(!inp.date)return
-    setTrainings(p=>[...p,{id:"t"+uid(),orgId,spId:sp.id,date:inp.date,seats:inp.seats||"",done:false,createdAt:todayStr()}])
-    setTrainInputs(p=>({...p,[orgId]:{date:"",seats:""}}))
+    const inp=trainInputs[orgId]||{}; if(!inp.date)return
+    setTrainings(p=>[...p,{id:"t"+uid(),orgId,spId:sp.id,date:inp.date,seats:inp.seats||"",done:false,createdAt:today}])
+    setTrIn(p=>({...p,[orgId]:{date:"",seats:""}}))
+  }
+  const deleteTraining=id=>setTrainings(p=>p.filter(t=>t.id!==id))
+
+  const addTask=(orgId)=>{
+    const text=(newTaskText[orgId]||"").trim(); if(!text)return
+    setTasks(p=>[...p,{id:"tk"+uid(),orgId,spId:sp.id,text,date:newTaskDate[orgId]||"",done:false,createdAt:today}])
+    setNTT(p=>({...p,[orgId]:""})); setNTD(p=>({...p,[orgId]:""}))
+  }
+  const toggleTask=id=>setTasks(p=>p.map(t=>t.id===id?{...t,done:!t.done}:t))
+  const deleteTask=id=>setTasks(p=>p.filter(t=>t.id!==id))
+
+  const setNote=(orgId,val)=>setNotes(p=>({...p,[orgId]:val}))
+  const setOrgDet=(orgId,patch)=>setOrgDetails(p=>({...p,[orgId]:{...(p[orgId]||{}),...patch}}))
+
+  // Folder filtering
+  const getOrgFolder=orgId=>{
+    const s=getAllTimeStatus(orgId)
+    if(!s) return "nove"
+    return STATUS_TO_FOLDER[s]||"nove"
   }
 
-  const displayOrgs = tab==="assigned"?allAsgn:allMy
+  const filteredOrgs = useMemo(()=>{
+    return allMy.filter(org=>{
+      if(activeFolder==="all") return true
+      return getOrgFolder(org.id)===activeFolder
+    })
+  },[allMy,activeFolder,interactions])
 
-  const renderCard=org=>{
-    const {status,emailed}=getStatus(org.id)
-    const isExp=expandedOrg===org.id
-    const sm=STATUS_META[status]||null
-    const orgT=trainings.filter(t=>t.orgId===org.id&&t.spId===sp.id)
-    const tinp=trainInputs[org.id]||{date:"",seats:""}
-    const isAsgn=allAsgn.some(a=>a.id===org.id)
-    const isObec=org.type==="Obec"
+  const folderCounts = useMemo(()=>{
+    const counts={all:allMy.length}
+    allMy.forEach(org=>{const f=getOrgFolder(org.id);counts[f]=(counts[f]||0)+1})
+    return counts
+  },[allMy,interactions])
+
+  const interests  = myIx.filter(i=>i.status==="interest").length
+  const noInt      = myIx.filter(i=>i.status==="no_interest").length
+  const postponed  = myIx.filter(i=>i.status==="postponed").length
+
+  const getOrgTabActive=orgId=>activeOrgTab[orgId]||"status"
+  const setOrgTabActive=(orgId,tab)=>setOrgTab(p=>({...p,[orgId]:tab}))
+
+  const renderOrgCard = org => {
+    const status     = getAllTimeStatus(org.id)
+    const sm         = STATUS_META[status]||null
+    const isExp      = expandedOrg===org.id
+    const orgT       = trainings.filter(t=>t.orgId===org.id&&t.spId===sp.id)
+    const orgTasks   = tasks.filter(t=>t.orgId===org.id&&t.spId===sp.id)
+    const overdueCnt = orgTasks.filter(t=>!t.done&&t.date&&t.date<today).length
+    const pendTasks  = orgTasks.filter(t=>!t.done).length
+    const tinp       = trainInputs[org.id]||{date:"",seats:""}
+    const note       = notes[org.id]||""
+    const det        = orgDetails[org.id]||{}
+    const courseDays = det.courseDays||0
+    const isObec     = org.type==="Obec"
+    const curTab     = getOrgTabActive(org.id)
+    const isAsgn     = allAsgn.some(a=>a.id===org.id)
+    const isCustom   = customOrgs.some(o=>o.id===org.id)
 
     return(<div key={org.id} className="org-card">
       <div className="org-head" onClick={()=>setExpOrg(isExp?null:org.id)}>
-        <div>
-          <div style={{display:"flex",alignItems:"center",gap:7}}>
+        <div style={{flex:1}}>
+          <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap"}}>
             <div className="org-org">{org.organization}</div>
             <span className={`tag-type ${isObec?"tag-obec":""}`}>{org.type}</span>
+            {sm&&<span className="sbadge" style={{background:sm.bg,color:sm.color}}>{sm.icon} {sm.label}</span>}
           </div>
           <div className="org-meta">
             {org.contact&&<span>👤 {org.contact}</span>}
             {org.phone&&<span>📞 {org.phone}</span>}
-            {isObec&&org.kraj&&<span>📍 {org.okres}, {org.kraj}</span>}
-            {isObec&&org.population>0&&<span className="ai-pop">👥 {org.population.toLocaleString("cs-CZ")}</span>}
+            {isObec&&org.okres&&<span>📍 {org.okres}</span>}
+            {isObec&&org.population>0&&<span style={{fontFamily:"'JetBrains Mono',monospace",color:"var(--blue)",fontSize:10}}>👥 {org.population.toLocaleString("cs-CZ")}</span>}
+            {org.web&&<a href={org.web.startsWith("http")?org.web:"https://"+org.web} target="_blank" rel="noopener" className="web-link" onClick={e=>e.stopPropagation()}>🌐 Web</a>}
+            {overdueCnt>0&&<span style={{color:"var(--red)",fontWeight:700,fontSize:10}}>⚠️ {overdueCnt} úkol po termínu</span>}
+            {pendTasks>0&&overdueCnt===0&&<span style={{color:"var(--amber)",fontSize:10}}>📌 {pendTasks} úkol</span>}
           </div>
         </div>
-        <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:3}}>
-          {sm&&<span className="sbadge" style={{background:sm.bg,color:sm.color}}>{sm.icon} {sm.label}</span>}
-          {emailed&&<span className="sbadge" style={{background:"#DBEAFE",color:"#2563EB"}}>📧 Email</span>}
-          {orgT.some(t=>t.done)&&<span className="sbadge" style={{background:"#DCFCE7",color:"#16A34A"}}>✅ Hotovo</span>}
-          <span style={{fontSize:11,color:"var(--muted)"}}>{isExp?"▲":"▼"}</span>
-        </div>
+        <span style={{fontSize:11,color:"var(--muted)",flexShrink:0}}>{isExp?"▲":"▼"}</span>
       </div>
-      {isExp&&<>
-        {isAsgn&&<div style={{padding:"8px 15px",borderTop:"1px solid var(--border)",background:"#FFF7ED"}}>
-          <button className="btn-sm green" onClick={()=>{const isC=org.id.startsWith("u")||org.id.startsWith("o");isC?claimCustom(org.id):claimDB(org.id);setTab("my")}}>+ Přidat do mých kontaktů</button>
+
+      {isExp&&<div className="org-body">
+        {isAsgn&&<div style={{padding:"7px 14px",background:"#FFF7ED",borderBottom:"1px solid var(--border)"}}>
+          <button className="btn-sm green" onClick={()=>{isCustom?claimCustom(org.id):claimDB(org.id)}}>+ Přidat do mých kontaktů</button>
         </div>}
-        <div className="org-actions">
-          <button className={`btn-act ${status==="interest"?"a-interest":""}`} onClick={()=>setStatus(org.id,"interest")}>✅ Zájem</button>
-          <button className={`btn-act ${status==="no_interest"?"a-no":""}`} onClick={()=>setStatus(org.id,"no_interest")}>❌ Nezájem</button>
-          <button className={`btn-act ${status==="postponed"?"a-post":""}`} onClick={()=>setStatus(org.id,"postponed")}>⏳ Odložit</button>
-          <button className={`btn-act ${emailed?"a-email":""}`} onClick={()=>sendEmail(org.id)}>📧 Email</button>
+
+        <div className="org-detail-tabs">
+          {[["status","📊 Status"],["training","📅 Školení"],["tasks","✅ Úkoly"],["notes","📝 Poznámky"],["edit","✏️ Upravit"]].map(([t,l])=>(
+            <button key={t} className={`odt ${curTab===t?"active":""}`} onClick={()=>setOrgTabActive(org.id,t)}>{l}</button>
+          ))}
         </div>
-        {status==="interest"&&<div className="train-box">
-          <div className="train-title">📅 Termíny školení</div>
-          {orgT.map(t=><div key={t.id} className={`train-entry ${t.done?"done":""}`}>
-            <div><div className="train-date">📅 {t.date}</div>{t.seats&&<div style={{fontSize:10,color:"var(--muted)"}}>👥 {t.seats} uchazečů</div>}</div>
-            {t.done?<span className="done-b">✅ HOTOVO</span>:<span className="pend-b">⏳ Čeká</span>}
-          </div>)}
-          <div className="train-row">
-            <input className="inp" type="date" value={tinp.date} style={{flex:2}} onChange={e=>setTrainInputs(p=>({...p,[org.id]:{...tinp,date:e.target.value}}))}/>
-            <input className="inp" type="number" placeholder="Počet" value={tinp.seats} style={{flex:1}} onChange={e=>setTrainInputs(p=>({...p,[org.id]:{...tinp,seats:e.target.value}}))}/>
-            <button className="btn-sm green" onClick={()=>addTraining(org.id)}>+</button>
-          </div>
-        </div>}
-      </>}
+
+        <div className="org-tab-content">
+          {/* STATUS TAB */}
+          {curTab==="status"&&<>
+            <div className="sec-hd" style={{marginBottom:8}}>Nastav status</div>
+            <div className="status-row">
+              <button className={`btn-status ${status==="interest"?"s-interest":""}`}     onClick={()=>setStatus(org.id,"interest")}>✅ Zájem</button>
+              <button className={`btn-status ${status==="no_interest"?"s-no":""}`}        onClick={()=>setStatus(org.id,"no_interest")}>❌ Nezájem</button>
+              <button className={`btn-status ${status==="postponed"?"s-post":""}`}        onClick={()=>setStatus(org.id,"postponed")}>⏳ Odložit</button>
+              <button className={`btn-status ${status==="emailed"?"s-email":""}`}         onClick={()=>setStatus(org.id,"emailed")}>📧 Email</button>
+              <button className={`btn-status ${status==="no_contact"?"s-nokontakt":""}`}  onClick={()=>setStatus(org.id,"no_contact")}>🚫 Nekontaktovat</button>
+              <button className={`btn-status ${status==="termin"?"s-termin":""}`}         onClick={()=>setStatus(org.id,"termin")}>📅 Má termín</button>
+            </div>
+            <div style={{display:"flex",gap:8,flexWrap:"wrap",marginTop:8}}>
+              {org.email&&<a href={`mailto:${org.email}`} className="web-link">✉️ {org.email}</a>}
+              {org.phone&&<a href={`tel:${org.phone}`} className="web-link">📞 {org.phone}</a>}
+              {org.web&&<a href={org.web.startsWith("http")?org.web:"https://"+org.web} target="_blank" rel="noopener" className="web-link">🌐 Webové stránky</a>}
+            </div>
+          </>}
+
+          {/* TRAINING TAB */}
+          {curTab==="training"&&<>
+            <div style={{marginBottom:12}}>
+              <div className="sec-hd">Délka kurzu</div>
+              <div style={{display:"flex",gap:6,marginBottom:12}}>
+                {[4,5,6].map(d=>(
+                  <button key={d} className={`btn-sm ${courseDays===d?"green":""}`} onClick={()=>setOrgDet(org.id,{courseDays:d})}>{d} dní</button>
+                ))}
+                {courseDays>0&&<span style={{fontSize:11,color:"var(--muted)",alignSelf:"center"}}>Vybráno: {courseDays} dní</span>}
+              </div>
+            </div>
+            {courseDays>0&&<>
+              <div className="sec-hd">Termíny školení ({orgT.length}/{courseDays})</div>
+              {orgT.map(t=>(
+                <div key={t.id} className={`train-entry ${t.done?"done":""}`}>
+                  <div>
+                    <div className="train-date">📅 {t.date}</div>
+                    {t.seats&&<div style={{fontSize:10,color:"var(--muted)"}}>👥 {t.seats} uchazečů</div>}
+                  </div>
+                  <div style={{display:"flex",gap:5,alignItems:"center"}}>
+                    {t.done?<span className="done-b">✅ HOTOVO</span>:<span className="pend-b">⏳ Čeká</span>}
+                    <button className="btn-sm red" onClick={()=>deleteTraining(t.id)} style={{padding:"3px 6px"}}>🗑</button>
+                  </div>
+                </div>
+              ))}
+              {orgT.length<courseDays&&<div style={{marginTop:8}}>
+                <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:6}}>
+                  <input className="inp" type="date" value={tinp.date} style={{flex:2}} onChange={e=>setTrIn(p=>({...p,[org.id]:{...tinp,date:e.target.value}}))}/>
+                  <input className="inp" type="number" placeholder="Počet" value={tinp.seats} style={{flex:1}} onChange={e=>setTrIn(p=>({...p,[org.id]:{...tinp,seats:e.target.value}}))}/>
+                  <button className="btn-sm green" onClick={()=>addTraining(org.id)}>+ Přidat</button>
+                </div>
+              </div>}
+              <div style={{marginTop:14}}>
+                <div className="sec-hd">Požadavky organizace</div>
+                <textarea className="notes-area" placeholder="Např: nemají notebooky, chtějí více AI v matematice…" value={det.requirements||""} onChange={e=>setOrgDet(org.id,{requirements:e.target.value})}/>
+              </div>
+            </>}
+            {courseDays===0&&<div style={{fontSize:12,color:"var(--muted)"}}>Nejprve vyber délku kurzu výše.</div>}
+          </>}
+
+          {/* TASKS TAB */}
+          {curTab==="tasks"&&<>
+            <div className="sec-hd">Úkoly & připomínky</div>
+            {tasks.filter(t=>t.orgId===org.id&&t.spId===sp.id).map(t=>{
+              const od=t.date&&t.date<today&&!t.done
+              return(<div key={t.id} className={`task-item ${od?"overdue":""} ${t.done?"done-task":""}`}>
+                <div className={`task-check ${t.done?"checked":""}`} onClick={()=>toggleTask(t.id)}>{t.done?"✓":""}</div>
+                <div className={`task-text ${t.done?"done-task":""}`}>{t.text}</div>
+                {t.date&&<div className={`task-date ${od?"overdue":""}`}>{od?"⚠️ ":""}{t.date}</div>}
+                <button className="btn-sm" style={{padding:"2px 6px",fontSize:10}} onClick={()=>deleteTask(t.id)}>🗑</button>
+              </div>)
+            })}
+            <div style={{display:"flex",gap:6,marginTop:8,flexWrap:"wrap"}}>
+              <input className="inp" style={{flex:1,minWidth:140}} placeholder="Nový úkol (zavolat, poslat email…)" value={newTaskText[org.id]||""} onChange={e=>setNTT(p=>({...p,[org.id]:e.target.value}))} onKeyDown={e=>e.key==="Enter"&&addTask(org.id)}/>
+              <input className="inp" type="date" style={{width:130}} value={newTaskDate[org.id]||""} onChange={e=>setNTD(p=>({...p,[org.id]:e.target.value}))}/>
+              <button className="btn-sm green" onClick={()=>addTask(org.id)}>+ Přidat</button>
+            </div>
+          </>}
+
+          {/* NOTES TAB */}
+          {curTab==="notes"&&<>
+            <div className="sec-hd">Poznámky</div>
+            <textarea className="notes-area" placeholder="Piš si sem cokoliv o této organizaci…" value={note} onChange={e=>setNote(org.id,e.target.value)} style={{minHeight:140}}/>
+            {note&&<div style={{fontSize:10,color:"var(--muted)",marginTop:4}}>Automaticky uloženo ✓</div>}
+          </>}
+
+          {/* EDIT TAB */}
+          {curTab==="edit"&&<>
+            <div className="sec-hd">Upravit organizaci</div>
+            {isCustom?<>
+              <div style={{display:"flex",flexDirection:"column",gap:7}}>
+                <input className="inp" placeholder="Název" value={org.organization} onChange={e=>updateCustomOrg(org.id,{organization:e.target.value})}/>
+                <div className="row2">
+                  <input className="inp" placeholder="Kontakt" value={org.contact||""} onChange={e=>updateCustomOrg(org.id,{contact:e.target.value})}/>
+                  <input className="inp" placeholder="Telefon" value={org.phone||""} onChange={e=>updateCustomOrg(org.id,{phone:e.target.value})}/>
+                </div>
+                <input className="inp" placeholder="Email" value={org.email||""} onChange={e=>updateCustomOrg(org.id,{email:e.target.value})}/>
+                <input className="inp" placeholder="Web (např. www.skola.cz)" value={org.web||""} onChange={e=>updateCustomOrg(org.id,{web:e.target.value})}/>
+                <select className="sel" value={org.type||""} onChange={e=>updateCustomOrg(org.id,{type:e.target.value})}>
+                  <option value="">Typ</option>{ORG_TYPES.map(t=><option key={t}>{t}</option>)}
+                </select>
+              </div>
+              <div style={{marginTop:12}}>
+                <button className="btn-red" style={{width:"100%"}} onClick={()=>{if(window.confirm("Smazat organizaci?"))deleteCustomOrg(org.id)}}>🗑 Smazat organizaci</button>
+              </div>
+            </>:<div style={{fontSize:12,color:"var(--muted)"}}>
+              Tato organizace je z databáze a nelze ji editovat. Web: {org.web?<a href={org.web.startsWith("http")?org.web:"https://"+org.web} target="_blank" rel="noopener" className="web-link">🌐 Otevřít</a>:"není k dispozici"}
+            </div>}
+          </>}
+        </div>
+      </div>}
     </div>)
   }
 
@@ -6665,23 +6908,38 @@ function SalespersonProfile({sp,salespeople,customOrgs,setCustomOrgs,orgOverride
           <div className="pstat"><div className="pstat-val" style={{color:"#D97706"}}>{postponed}</div><div className="pstat-lbl">Odloženo</div></div>
         </div>
       </div>
+
+      {(overdueTasks.length>0||todayTasks.length>0)&&<div className="notif-banner">
+        <div className="notif-banner-title">⚠️ Připomínky ({overdueTasks.length+todayTasks.length})</div>
+        {overdueTasks.slice(0,3).map(t=>{
+          const org=[...customOrgs,...ALL_ORGS_DB].find(o=>o.id===t.orgId)
+          return<div key={t.id} className="notif-item">⚠️ <b>{org?.organization||"?"}</b>: {t.text} <span style={{marginLeft:"auto",fontSize:10}}>{t.date}</span></div>
+        })}
+        {todayTasks.slice(0,2).map(t=>{
+          const org=[...customOrgs,...ALL_ORGS_DB].find(o=>o.id===t.orgId)
+          return<div key={t.id} className="notif-item">📌 <b>{org?.organization||"?"}</b>: {t.text}</div>
+        })}
+      </div>}
+
       <div>
         {myReqs.length>0
-          ?<div style={{background:"#FEF3C7",border:"1.5px solid #FCD34D",borderRadius:10,padding:"10px 13px",fontSize:12,color:"#92400E",fontWeight:600}}>⏳ Žádost odeslána manažerovi</div>
+          ?<div style={{background:"#FEF3C7",border:"1.5px solid #FCD34D",borderRadius:10,padding:"9px 12px",fontSize:11,color:"#92400E",fontWeight:600}}>⏳ Žádost odeslána manažerovi</div>
           :<button className="btn-request" onClick={sendReq}>📢 CHCI ORGANIZACE</button>}
       </div>
+
       {allAsgn.length>0&&<div className="req-notification">
         <div className="req-notification-title">📥 Přiřazeno manažerem ({allAsgn.length})</div>
-        {allAsgn.slice(0,5).map(o=><div key={o.id} className="req-item">
+        {allAsgn.slice(0,4).map(o=><div key={o.id} className="req-item">
           <span style={{fontWeight:600,fontSize:11}}>{o.organization}</span>
-          <button className="btn-sm green" onClick={()=>{const isC=o.id.startsWith("u")||o.id.startsWith("o");isC?claimCustom(o.id):claimDB(o.id);setTab("my")}}>+ Přidat</button>
+          <button className="btn-sm green" onClick={()=>{customOrgs.find(c=>c.id===o.id)?claimCustom(o.id):claimDB(o.id)}}>+ Přidat</button>
         </div>)}
-        {allAsgn.length>5&&<div style={{fontSize:10,color:"var(--muted)",marginTop:4}}>+{allAsgn.length-5} dalších</div>}
+        {allAsgn.length>4&&<div style={{fontSize:10,color:"var(--muted)",marginTop:3}}>+{allAsgn.length-4} dalších</div>}
       </div>}
+
       <div>
         <div className="sec-hd">➕ Přidat organizaci</div>
         <div className="add-form">
-          <input className="inp" placeholder="Název organizace *" value={addForm.organization} onChange={e=>setAddForm(f=>({...f,organization:e.target.value}))}/>
+          <input className="inp" placeholder="Název *" value={addForm.organization} onChange={e=>setAddForm(f=>({...f,organization:e.target.value}))}/>
           <input className="inp" placeholder="Kontaktní osoba" value={addForm.contact} onChange={e=>setAddForm(f=>({...f,contact:e.target.value}))}/>
           <div className="row2">
             <input className="inp" placeholder="Telefon" value={addForm.phone} onChange={e=>setAddForm(f=>({...f,phone:e.target.value}))}/>
@@ -6690,23 +6948,34 @@ function SalespersonProfile({sp,salespeople,customOrgs,setCustomOrgs,orgOverride
             </select>
           </div>
           <input className="inp" placeholder="Email" value={addForm.email} onChange={e=>setAddForm(f=>({...f,email:e.target.value}))}/>
-          <input className="inp" placeholder="Poznámka" value={addForm.note} onChange={e=>setAddForm(f=>({...f,note:e.target.value}))}/>
+          <input className="inp" placeholder="Web (www.skola.cz)" value={addForm.web} onChange={e=>setAddForm(f=>({...f,web:e.target.value}))}/>
           <button className="btn-green" style={{width:"100%"}} onClick={addOrg}>+ Přidat</button>
         </div>
       </div>
     </div>
+
     <div className="profile-right">
-      <div style={{fontSize:17,fontWeight:700}}>Moje organizace</div>
-      <div className="asgn-tabs">
-        <button className={`asgn-tab ${tab==="assigned"?"active":""}`} onClick={()=>setTab("assigned")}>Přiřazené od manažera{allAsgn.length>0?` (${allAsgn.length})`:""}</button>
-        <button className={`asgn-tab ${tab==="my"?"active":""}`} onClick={()=>setTab("my")}>Moje kontakty{allMy.length>0?` (${allMy.length})`:""}</button>
+      <div style={{fontSize:16,fontWeight:700}}>Moje organizace <span style={{fontSize:12,color:"var(--muted)",fontWeight:400}}>({allMy.length})</span></div>
+
+      <div className="folder-tabs">
+        {FOLDERS.map(f=>{
+          const cnt=f.id==="all"?allMy.length:(folderCounts[f.id]||0)
+          if(f.id!=="all"&&cnt===0) return null
+          return(<button key={f.id} className={`folder-tab ${activeFolder===f.id?"active":""}`}
+            style={activeFolder===f.id?{background:f.color}:{}}
+            onClick={()=>setFolder(f.id)}>
+            {f.icon} {f.label} <span className="folder-count" style={{background:activeFolder===f.id?"rgba(255,255,255,.25)":"var(--bg)"}}>{cnt}</span>
+          </button>)
+        })}
       </div>
-      {displayOrgs.length===0&&<div className="empty-s"><div className="empty-icon">{tab==="assigned"?"📥":"📋"}</div><div>{tab==="assigned"?"Žádné přiřazené organizace.":"Zatím žádné vlastní kontakty."}</div></div>}
-      {displayOrgs.map(org=>renderCard(org))}
+
+      {filteredOrgs.length===0&&<div className="empty-s"><div className="empty-icon">📋</div><div>Žádné organizace v této složce.</div></div>}
+      {filteredOrgs.map(org=>renderOrgCard(org))}
     </div>
   </div>)
 }
 
+// ─── MANAGER DASHBOARD ────────────────────────────────────────────────────────
 function ManagerDashboard({salespeople,customOrgs,setCustomOrgs,orgOverrides,setOrgAssigned,interactions,trainings,setTrainings,orgRequests,setOrgRequests,resolveOrg}){
   const [tab,setTab]=useState("report")
   const today=todayStr()
@@ -6723,47 +6992,58 @@ function ManagerDashboard({salespeople,customOrgs,setCustomOrgs,orgOverrides,set
   const markDone=id=>setTrainings(p=>p.map(t=>t.id===id?{...t,done:true}:t))
   const dismissReq=id=>setOrgRequests(p=>p.filter(r=>r.id!==id))
 
+  const groups=useMemo(()=>{
+    const map={}
+    trainings.forEach(t=>{if(!map[t.orgId])map[t.orgId]={orgId:t.orgId,spId:t.spId,trainings:[]};map[t.orgId].trainings.push(t)})
+    return Object.values(map).map(g=>{
+      const s=[...g.trainings].sort((a,b)=>a.date>b.date?1:-1)
+      return{...g,trainings:s,earliest:s[0]?.date,latest:s[s.length-1]?.date,allDone:s.every(t=>t.done)}
+    })
+  },[trainings])
+
+  const [expT,setExpT]=useState(new Set())
+  const toggleT=id=>setExpT(p=>{const n=new Set(p);n.has(id)?n.delete(id):n.add(id);return n})
+  const getOrgName=id=>[...customOrgs,...ALL_ORGS_DB].find(o=>o.id===id)?.organization||id
+  const getSpName=id=>{const s=salespeople.find(x=>x.id===id);return s?`${s.emoji} ${s.name}`:id}
+
   return(<div className="screen"><div className="mgr-wrap">
-    <div style={{fontSize:22,fontWeight:700}}>🧑‍💼 Manažerský panel</div>
-    {orgRequests.length>0&&<div style={{background:"#FEF2F2",border:"1.5px solid #FECACA",borderRadius:12,padding:"14px 18px"}}>
-      <div style={{fontWeight:700,color:"var(--red)",marginBottom:10,fontSize:13}}>📢 Žádosti o organizace ({orgRequests.length})</div>
-      {orgRequests.map(r=><div key={r.id} style={{display:"flex",alignItems:"center",gap:10,fontSize:13,marginBottom:6}}>
-        <span style={{fontSize:18}}>{r.spEmoji}</span><span style={{fontWeight:600}}>{r.spName}</span>
-        <span style={{color:"var(--muted)",fontSize:11}}>žádá o organizace · {r.date}</span>
+    <div style={{fontSize:21,fontWeight:700}}>🧑‍💼 Manažerský panel</div>
+    {orgRequests.length>0&&<div style={{background:"#FEF2F2",border:"1.5px solid #FECACA",borderRadius:12,padding:"12px 16px"}}>
+      <div style={{fontWeight:700,color:"var(--red)",marginBottom:8,fontSize:12}}>📢 Žádosti o organizace ({orgRequests.length})</div>
+      {orgRequests.map(r=><div key={r.id} style={{display:"flex",alignItems:"center",gap:8,fontSize:12,marginBottom:5}}>
+        <span style={{fontSize:16}}>{r.spEmoji}</span><span style={{fontWeight:600}}>{r.spName}</span>
+        <span style={{color:"var(--muted)",fontSize:10}}>· {r.date}</span>
         <button className="btn-sm green" style={{marginLeft:"auto"}} onClick={()=>{setTab("assign");dismissReq(r.id)}}>→ Přiřadit</button>
         <button className="btn-sm" onClick={()=>dismissReq(r.id)}>✕</button>
       </div>)}
     </div>}
+
     <div className="mgr-tabs">
-      {[["report","📊 Denní report"],["assign","📋 Přiřadit org."],["trainings","📅 Školení"],["pipeline","🔭 Pipeline"]].map(([k,l])=>(
+      {[["report","📊 Report"],["assign","📋 Přiřadit"],["trainings","📅 Školení"],["pipeline","🔭 Pipeline"]].map(([k,l])=>(
         <button key={k} className={`tab-btn ${tab===k?"active":""}`} onClick={()=>setTab(k)}>{l}</button>
       ))}
     </div>
 
     {tab==="report"&&<>
-      <div style={{fontSize:15,color:"var(--muted)"}}><span style={{color:"var(--ink)",fontWeight:700}}>Dnes</span> — {todayLabel()}</div>
+      <div style={{fontSize:13,color:"var(--muted)"}}><span style={{color:"var(--ink)",fontWeight:700}}>Dnes</span> — {todayLabel()}</div>
       <div className="kpi-row">
-        {[[todayIx.filter(i=>i.status==="interest").length,"#16A34A","Zájmy dnes"],[todayIx.filter(i=>i.status==="no_interest").length,"#DC2626","Nezájmy dnes"],[todayIx.filter(i=>i.status==="postponed").length,"#D97706","Odloženo"],[todayIx.filter(i=>i.status==="emailed").length,"#2563EB","Emaily"],[new Set(todayIx.map(i=>i.spId)).size,"var(--ink)","Aktivní"],[pendingT,"#D97706","Čekají školení"]].map(([v,c,l])=>(
+        {[[todayIx.filter(i=>i.status==="interest").length,"#16A34A","Zájmy"],[todayIx.filter(i=>i.status==="no_interest").length,"#DC2626","Nezájmy"],[todayIx.filter(i=>i.status==="postponed").length,"#D97706","Odloženo"],[todayIx.filter(i=>i.status==="emailed").length,"#2563EB","Emaily"],[new Set(todayIx.map(i=>i.spId)).size,"var(--ink)","Aktivní"],[pendingT,"#D97706","Školení čeká"]].map(([v,c,l])=>(
           <div key={l} className="kpi-card"><div className="kpi-val" style={{color:c}}>{v}</div><div className="kpi-lbl">{l}</div></div>
         ))}
       </div>
-      <div style={{display:"flex",flexDirection:"column",gap:10}}>
+      <div style={{display:"flex",flexDirection:"column",gap:9}}>
         {spStats.map(({sp,todayIx})=>(
           <div key={sp.id} className="sp-report">
-            <div className="sp-report-name"><span style={{fontSize:20}}>{sp.emoji}</span>{sp.name}{todayIx.length===0&&<span style={{fontSize:11,color:"var(--muted)",fontWeight:400}}>— dnes nepracoval</span>}</div>
+            <div className="sp-report-name"><span style={{fontSize:18}}>{sp.emoji}</span>{sp.name}{todayIx.length===0&&<span style={{fontSize:10,color:"var(--muted)",fontWeight:400}}>— nepracoval</span>}</div>
             {todayIx.length>0&&<>
               <div className="stat-chips">
-                <span className="stat-chip" style={{background:"#DCFCE7",color:"#16A34A"}}>✅ {todayIx.filter(i=>i.status==="interest").length} zájem</span>
-                <span className="stat-chip" style={{background:"#FEE2E2",color:"#DC2626"}}>❌ {todayIx.filter(i=>i.status==="no_interest").length} nezájem</span>
-                <span className="stat-chip" style={{background:"#FEF3C7",color:"#D97706"}}>⏳ {todayIx.filter(i=>i.status==="postponed").length} odloženo</span>
-                <span className="stat-chip" style={{background:"#DBEAFE",color:"#2563EB"}}>📧 {todayIx.filter(i=>i.status==="emailed").length} email</span>
+                <span className="stat-chip" style={{background:"#DCFCE7",color:"#16A34A"}}>✅ {todayIx.filter(i=>i.status==="interest").length}</span>
+                <span className="stat-chip" style={{background:"#FEE2E2",color:"#DC2626"}}>❌ {todayIx.filter(i=>i.status==="no_interest").length}</span>
+                <span className="stat-chip" style={{background:"#FEF3C7",color:"#D97706"}}>⏳ {todayIx.filter(i=>i.status==="postponed").length}</span>
+                <span className="stat-chip" style={{background:"#DBEAFE",color:"#2563EB"}}>📧 {todayIx.filter(i=>i.status==="emailed").length}</span>
               </div>
               <div className="act-list">
-                {todayIx.map(i=>{
-                  const org=[...customOrgs,...ALL_ORGS_DB].find(o=>o.id===i.orgId)
-                  const sm=STATUS_META[i.status]
-                  return<div key={i.id} className="act-item"><span>{sm?.icon}</span><span style={{fontWeight:600}}>{org?.organization||"?"}</span><span style={{color:sm?.color}}>{sm?.label}</span></div>
-                })}
+                {todayIx.map(i=>{const org=[...customOrgs,...ALL_ORGS_DB].find(o=>o.id===i.orgId);const sm=STATUS_META[i.status];return<div key={i.id} className="act-item"><span>{sm?.icon}</span><span style={{fontWeight:600}}>{org?.organization||"?"}</span><span style={{color:sm?.color,fontSize:10}}>{sm?.label}</span></div>})}
               </div>
             </>}
           </div>
@@ -6772,9 +7052,35 @@ function ManagerDashboard({salespeople,customOrgs,setCustomOrgs,orgOverrides,set
     </>}
 
     {tab==="assign"&&<AssignTab salespeople={salespeople} customOrgs={customOrgs} setCustomOrgs={setCustomOrgs} orgOverrides={orgOverrides} setOrgAssigned={setOrgAssigned}/>}
-    {tab==="trainings"&&<TrainingsTab trainings={trainings} markDone={markDone} customOrgs={customOrgs} salespeople={salespeople}/>}
-    {tab==="pipeline"&&<div style={{display:"flex",flexDirection:"column",gap:16}}>
-      <div style={{fontWeight:700,fontSize:15}}>🔭 Celková pipeline</div>
+
+    {tab==="trainings"&&<div style={{display:"flex",flexDirection:"column",gap:8}}>
+      <div style={{fontWeight:700,fontSize:14}}>Školení dle organizace</div>
+      {groups.length===0&&<div className="empty-s"><div className="empty-icon">📅</div><div>Žádná školení.</div></div>}
+      {groups.map(g=>(
+        <div key={g.orgId} className={`tmgr-item ${g.allDone?"done-t":""} ${expT.has(g.orgId)?"expanded-t":""}`} onClick={()=>toggleT(g.orgId)}>
+          <div className="tmgr-head">
+            <div>
+              <div className="tmgr-org">{getOrgName(g.orgId)}</div>
+              <div className="tmgr-meta">{getSpName(g.spId)} · <span style={{fontFamily:"'JetBrains Mono',monospace"}}>{g.earliest===g.latest?g.earliest:`${g.earliest} → ${g.latest}`}</span> · {g.trainings.length} termín{g.trainings.length>1?"y":""}</div>
+            </div>
+            <div style={{display:"flex",alignItems:"center",gap:7}}>
+              {g.allDone?<span className="done-b">✅ HOTOVO</span>:<span className="pend-b">⏳ {g.trainings.filter(t=>!t.done).length} čeká</span>}
+              <span style={{fontSize:11,color:"var(--muted)"}}>{expT.has(g.orgId)?"▲":"▼"}</span>
+            </div>
+          </div>
+          {expT.has(g.orgId)&&<div className="tmgr-detail" onClick={e=>e.stopPropagation()}>
+            {g.trainings.map(t=><div key={t.id} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"5px 0",borderBottom:"1px solid var(--border)"}}>
+              <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:11}}>📅 {t.date}</span>
+              {t.seats&&<span style={{fontSize:10,color:"var(--muted)"}}>👥 {t.seats}</span>}
+              {t.done?<span className="done-b">✅</span>:<button className="btn-sm green" onClick={()=>markDone(t.id)}>✅ Hotovo</button>}
+            </div>)}
+          </div>}
+        </div>
+      ))}
+    </div>}
+
+    {tab==="pipeline"&&<div style={{display:"flex",flexDirection:"column",gap:14}}>
+      <div style={{fontWeight:700,fontSize:14}}>🔭 Pipeline</div>
       <div className="funnel-wrap">
         {Object.entries(STATUS_META).map(([k,v])=>{
           const count=interactions.filter(i=>i.status===k).length
@@ -6795,222 +7101,64 @@ function ManagerDashboard({salespeople,customOrgs,setCustomOrgs,orgOverrides,set
   </div></div>)
 }
 
-function TrainingsTab({trainings,markDone,customOrgs,salespeople}){
-  const [expanded,setExpanded]=useState(new Set())
-  const toggle=id=>setExpanded(p=>{const n=new Set(p);n.has(id)?n.delete(id):n.add(id);return n})
-
-  const groups=useMemo(()=>{
-    const map={}
-    trainings.forEach(t=>{if(!map[t.orgId])map[t.orgId]={orgId:t.orgId,spId:t.spId,trainings:[]};map[t.orgId].trainings.push(t)})
-    return Object.values(map).map(g=>{
-      const sorted=[...g.trainings].sort((a,b)=>a.date>b.date?1:-1)
-      return{...g,trainings:sorted,earliest:sorted[0]?.date,latest:sorted[sorted.length-1]?.date,allDone:sorted.every(t=>t.done)}
-    })
-  },[trainings])
-
-  const getOrgName=orgId=>[...customOrgs,...ALL_ORGS_DB].find(o=>o.id===orgId)?.organization||orgId
-  const getSpName=spId=>{const sp=salespeople.find(s=>s.id===spId);return sp?`${sp.emoji} ${sp.name}`:spId}
-
-  if(groups.length===0)return<div className="empty-s"><div className="empty-icon">📅</div><div>Žádná školení zatím.</div></div>
-  return(<div style={{display:"flex",flexDirection:"column",gap:8}}>
-    <div style={{fontWeight:700,fontSize:15,marginBottom:4}}>Přehled školení dle organizace</div>
-    {groups.map(g=>{
-      const isExp=expanded.has(g.orgId)
-      return(<div key={g.orgId} className={`tmgr-item ${g.allDone?"done-t":""} ${isExp?"expanded-t":""}`} onClick={()=>toggle(g.orgId)}>
-        <div className="tmgr-head">
-          <div>
-            <div className="tmgr-org">{getOrgName(g.orgId)}</div>
-            <div className="tmgr-meta">{getSpName(g.spId)} · <span style={{fontFamily:"'JetBrains Mono',monospace"}}>{g.earliest===g.latest?g.earliest:`${g.earliest} → ${g.latest}`}</span> · {g.trainings.length} termín{g.trainings.length>1?"y":""}</div>
-          </div>
-          <div style={{display:"flex",alignItems:"center",gap:8}}>
-            {g.allDone?<span className="done-b">✅ HOTOVO</span>:<span className="pend-b">⏳ {g.trainings.filter(t=>!t.done).length} čeká</span>}
-            <span style={{fontSize:12,color:"var(--muted)"}}>{isExp?"▲":"▼"}</span>
-          </div>
-        </div>
-        {isExp&&<div className="tmgr-detail" onClick={e=>e.stopPropagation()}>
-          {g.trainings.map(t=><div key={t.id} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"6px 0",borderBottom:"1px solid var(--border)"}}>
-            <div><span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:12}}>📅 {t.date}</span>{t.seats&&<span style={{fontSize:11,color:"var(--muted)",marginLeft:10}}>👥 {t.seats} uchazečů</span>}</div>
-            {t.done?<span className="done-b">✅ HOTOVO</span>:<button className="btn-sm green" onClick={()=>markDone(t.id)}>✅ Označit hotovo</button>}
-          </div>)}
-        </div>}
-      </div>)
-    })}
-  </div>)
-}
-
 const PAGE_SIZE=50
-
 function AssignTab({salespeople,customOrgs,setCustomOrgs,orgOverrides,setOrgAssigned}){
-  const [search,setSearch]       = useState("")
-  const [typeFilter,setTypeF]    = useState("")
-  const [krajFilter,setKrajF]    = useState("")
-  const [okresFilter,setOkresF]  = useState("")
-  const [popMin,setPopMin]       = useState("")
-  const [popMax,setPopMax]       = useState("")
-  const [selectedIds,setSelIds]  = useState(new Set())
-  const [targetSpId,setTargetSp] = useState("")
-  const [page,setPage]           = useState(1)
-  const [newOrg,setNewOrg]       = useState({organization:"",contact:"",phone:"",email:"",type:""})
-
-  const assignedIds = new Set(Object.keys(orgOverrides))
-  const unassignedCustom = customOrgs.filter(o=>!o.assignedTo&&!o.addedBy)
-  const unassignedDB = ALL_ORGS_DB.filter(o=>!assignedIds.has(o.id))
-  const allUnassigned = [...unassignedCustom,...unassignedDB]
-
-  // Dynamic okresy based on selected kraj
-  const availableOkresy = useMemo(()=>{
-    if(!krajFilter) return ALL_OKRESY
-    const inKraj = new Set(ALL_ORGS_DB.filter(o=>o.kraj===krajFilter&&o.okres).map(o=>o.okres))
-    return ALL_OKRESY.filter(o=>inKraj.has(o))
-  },[krajFilter])
-
-  const filtered = useMemo(()=>{
-    return allUnassigned.filter(o=>{
-      if(typeFilter&&o.type!==typeFilter) return false
-      if(krajFilter&&o.kraj!==krajFilter) return false
-      if(okresFilter&&o.okres!==okresFilter) return false
-      if(popMin&&(o.population||0)<parseInt(popMin)) return false
-      if(popMax&&(o.population||0)>parseInt(popMax)) return false
-      if(search){const q=search.toLowerCase();return o.organization.toLowerCase().includes(q)||(o.contact||"").toLowerCase().includes(q)}
-      return true
-    })
-  },[search,typeFilter,krajFilter,okresFilter,popMin,popMax,customOrgs,orgOverrides])
-
+  const [search,setSearch]=useState(""); const [typeF,setTypeF]=useState(""); const [krajF,setKrajF]=useState(""); const [okresF,setOkresF]=useState(""); const [popMin,setPopMin]=useState(""); const [popMax,setPopMax]=useState(""); const [selIds,setSelIds]=useState(new Set()); const [targetSp,setTargetSp]=useState(""); const [page,setPage]=useState(1); const [newOrg,setNewOrg]=useState({organization:"",contact:"",phone:"",email:"",type:"",web:""})
+  const assignedIds=new Set(Object.keys(orgOverrides))
+  const unassignedDB=ALL_ORGS_DB.filter(o=>!assignedIds.has(o.id))
+  const unassignedCustom=customOrgs.filter(o=>!o.assignedTo&&!o.addedBy)
+  const allU=[...unassignedCustom,...unassignedDB]
+  const availOkresy=useMemo(()=>{if(!krajF)return ALL_OKRESY;const s=new Set(ALL_ORGS_DB.filter(o=>o.kraj===krajF&&o.okres).map(o=>o.okres));return ALL_OKRESY.filter(o=>s.has(o))},[krajF])
+  const filtered=useMemo(()=>allU.filter(o=>{if(typeF&&o.type!==typeF)return false;if(krajF&&o.kraj!==krajF)return false;if(okresF&&o.okres!==okresF)return false;if(popMin&&(o.population||0)<parseInt(popMin))return false;if(popMax&&(o.population||0)>parseInt(popMax))return false;if(search){const q=search.toLowerCase();return o.organization.toLowerCase().includes(q)||(o.contact||"").toLowerCase().includes(q)}return true}),[search,typeF,krajF,okresF,popMin,popMax,customOrgs,orgOverrides])
   const totalPages=Math.ceil(filtered.length/PAGE_SIZE)||1
   const pageItems=filtered.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE)
   const toggle=id=>setSelIds(p=>{const n=new Set(p);n.has(id)?n.delete(id):n.add(id);return n})
-  const selectPage=()=>setSelIds(p=>{const n=new Set(p);pageItems.forEach(o=>n.add(o.id));return n})
-  const clearSel=()=>setSelIds(new Set())
-
-  const resetFilters=()=>{setSearch("");setTypeF("");setKrajF("");setOkresF("");setPopMin("");setPopMax("");setPage(1)}
-
-  const assignOrgs=()=>{
-    if(!targetSpId||selectedIds.size===0)return
-    selectedIds.forEach(id=>{
-      if(customOrgs.find(o=>o.id===id))setCustomOrgs(db=>db.map(o=>o.id===id?{...o,assignedTo:targetSpId}:o))
-      else setOrgAssigned(id,targetSpId)
-    })
-    setSelIds(new Set());setTargetSp("")
-  }
-
-  const addOrgToDB=()=>{
-    if(!newOrg.organization.trim())return
-    setCustomOrgs(db=>[...db,{id:"m"+uid(),...newOrg,kraj:"",okres:"",population:0,assignedTo:null,addedBy:null}])
-    setNewOrg({organization:"",contact:"",phone:"",email:"",type:""})
-  }
-
-  const targetSp=salespeople.find(s=>s.id===targetSpId)
-  const hasFilters=search||typeFilter||krajFilter||okresFilter||popMin||popMax
-
-  return(<div style={{display:"flex",flexDirection:"column",gap:18}}>
+  const assignOrgs=()=>{if(!targetSp||selIds.size===0)return;selIds.forEach(id=>{if(customOrgs.find(o=>o.id===id))setCustomOrgs(db=>db.map(o=>o.id===id?{...o,assignedTo:targetSp}:o));else setOrgAssigned(id,targetSp)});setSelIds(new Set());setTargetSp("")}
+  const addOrgToDB=()=>{if(!newOrg.organization.trim())return;setCustomOrgs(db=>[...db,{id:"m"+uid(),...newOrg,kraj:"",okres:"",population:0,assignedTo:null,addedBy:null}]);setNewOrg({organization:"",contact:"",phone:"",email:"",type:"",web:""})}
+  const sp=salespeople.find(s=>s.id===targetSp)
+  return(<div style={{display:"flex",flexDirection:"column",gap:16}}>
     <div className="section-card">
-      <div style={{fontWeight:700,fontSize:13,marginBottom:12}}>➕ Přidat organizaci do databáze</div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8}}>
+      <div style={{fontWeight:700,fontSize:12,marginBottom:10}}>➕ Přidat do databáze</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:7}}>
         <input className="inp" placeholder="Název *" value={newOrg.organization} onChange={e=>setNewOrg(f=>({...f,organization:e.target.value}))}/>
         <input className="inp" placeholder="Kontakt" value={newOrg.contact} onChange={e=>setNewOrg(f=>({...f,contact:e.target.value}))}/>
-        <select className="sel" value={newOrg.type} onChange={e=>setNewOrg(f=>({...f,type:e.target.value}))}>
-          <option value="">Typ</option>{ORG_TYPES.map(t=><option key={t}>{t}</option>)}
-        </select>
+        <select className="sel" value={newOrg.type} onChange={e=>setNewOrg(f=>({...f,type:e.target.value}))}><option value="">Typ</option>{ORG_TYPES.map(t=><option key={t}>{t}</option>)}</select>
         <input className="inp" placeholder="Telefon" value={newOrg.phone} onChange={e=>setNewOrg(f=>({...f,phone:e.target.value}))}/>
         <input className="inp" placeholder="Email" value={newOrg.email} onChange={e=>setNewOrg(f=>({...f,email:e.target.value}))}/>
-        <button className="btn-green" onClick={addOrgToDB}>+ Přidat do DB</button>
+        <button className="btn-green" onClick={addOrgToDB}>+ Přidat</button>
       </div>
     </div>
-
     <div className="assign-layout">
       <div className="assign-pool">
-        <div style={{fontWeight:700,fontSize:13,marginBottom:10,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <span>📦 Nepřiřazené <span style={{color:"var(--muted)",fontWeight:400,fontSize:11}}>({filtered.length.toLocaleString("cs-CZ")} celkem)</span></span>
-          <div style={{display:"flex",gap:6}}>
-            <button className="btn-sm" onClick={selectPage}>✓ Stránka</button>
-            <button className="btn-sm" onClick={clearSel}>Zrušit vše</button>
-            {hasFilters&&<button className="btn-sm red" onClick={resetFilters}>✕ Filtry</button>}
-          </div>
+        <div style={{fontWeight:700,fontSize:12,marginBottom:9,display:"flex",justifyContent:"space-between"}}>
+          <span>📦 Nepřiřazené ({filtered.length.toLocaleString("cs-CZ")})</span>
+          <div style={{display:"flex",gap:5}}><button className="btn-sm" onClick={()=>setSelIds(new Set(pageItems.map(o=>o.id)))}>✓ Stránka</button><button className="btn-sm" onClick={()=>setSelIds(new Set())}>✕</button></div>
         </div>
-
-        {/* ROW 1: search + type */}
-        <div className="filters-row">
-          <div className="search-wrap">
-            <span className="search-icon">🔍</span>
-            <input className="search-inp" placeholder="Hledat název nebo kontakt…" value={search} onChange={e=>{setSearch(e.target.value);setPage(1)}}/>
-          </div>
-          <select className="filter-sel" value={typeFilter} onChange={e=>{setTypeF(e.target.value);setPage(1)}}>
-            <option value="">Všechny typy</option>
-            {ORG_TYPES.map(t=><option key={t}>{t}</option>)}
-          </select>
-        </div>
-
-        {/* ROW 2: kraj + okres */}
-        <div className="filters-row">
-          <select className="filter-sel" style={{flex:1,maxWidth:"none"}} value={krajFilter} onChange={e=>{setKrajF(e.target.value);setOkresF("");setPage(1)}}>
-            <option value="">Všechny kraje</option>
-            {ALL_KRAJE.map(k=><option key={k}>{k}</option>)}
-          </select>
-          <select className="filter-sel" style={{flex:1,maxWidth:"none"}} value={okresFilter} onChange={e=>{setOkresF(e.target.value);setPage(1)}}>
-            <option value="">Všechny okresy</option>
-            {availableOkresy.map(o=><option key={o}>{o}</option>)}
-          </select>
-        </div>
-
-        {/* ROW 3: population range */}
-        <div className="filters-row">
-          <span style={{fontSize:11,color:"var(--muted)",whiteSpace:"nowrap"}}>👥 Obyvatel:</span>
-          <input className="search-inp" style={{width:90}} placeholder="Min" type="number" value={popMin} onChange={e=>{setPopMin(e.target.value);setPage(1)}}/>
-          <span style={{fontSize:11,color:"var(--muted)"}}>–</span>
-          <input className="search-inp" style={{width:90}} placeholder="Max" type="number" value={popMax} onChange={e=>{setPopMax(e.target.value);setPage(1)}}/>
-        </div>
-
-        {selectedIds.size>0&&<div className="sel-summary">Vybráno: <b>{selectedIds.size}</b> organizací</div>}
-
-        <div className="vl-info">
-          <span>Stránka {page}/{totalPages} · {pageItems.length} z {filtered.length.toLocaleString("cs-CZ")}</span>
-        </div>
-        <div className="virtual-list">
-          {pageItems.map(o=>{
-            const isObec=o.type==="Obec"
-            return(<div key={o.id} className={`assign-item ${selectedIds.has(o.id)?"sel":""}`} onClick={()=>toggle(o.id)}>
-              <div className="assign-item-check">{selectedIds.has(o.id)?"✓":""}</div>
-              <div style={{flex:1}}>
-                <div className="ai-main">{o.organization}</div>
-                <div className="ai-sub">
-                  <span className={`tag-type ${isObec?"tag-obec":""}`} style={{fontSize:9}}>{o.type}</span>
-                  {o.okres&&<span>📍 {o.okres}</span>}
-                  {o.contact&&<span>👤 {o.contact}</span>}
-                  {isObec&&o.population>0&&<span className="ai-pop">{o.population.toLocaleString("cs-CZ")} ob.</span>}
-                </div>
-              </div>
-            </div>)
-          })}
-        </div>
-        {totalPages>1&&<div className="pagination">
-          <button className="btn-sm" disabled={page===1} onClick={()=>setPage(p=>p-1)}>←</button>
-          <span style={{fontSize:12,color:"var(--muted)"}}>{page} / {totalPages}</span>
-          <button className="btn-sm" disabled={page===totalPages} onClick={()=>setPage(p=>p+1)}>→</button>
-        </div>}
+        <div className="filters-row"><div className="search-wrap"><span className="search-icon">🔍</span><input className="search-inp" placeholder="Hledat…" value={search} onChange={e=>{setSearch(e.target.value);setPage(1)}}/></div><select className="filter-sel" value={typeF} onChange={e=>{setTypeF(e.target.value);setPage(1)}}><option value="">Typy</option>{ORG_TYPES.map(t=><option key={t}>{t}</option>)}</select></div>
+        <div className="filters-row"><select className="filter-sel" style={{flex:1}} value={krajF} onChange={e=>{setKrajF(e.target.value);setOkresF("");setPage(1)}}><option value="">Kraj</option>{ALL_KRAJE.map(k=><option key={k}>{k}</option>)}</select><select className="filter-sel" style={{flex:1}} value={okresF} onChange={e=>{setOkresF(e.target.value);setPage(1)}}><option value="">Okres</option>{availOkresy.map(o=><option key={o}>{o}</option>)}</select></div>
+        <div className="filters-row"><span style={{fontSize:10,color:"var(--muted)"}}>👥 Min:</span><input className="search-inp" style={{width:70}} type="number" value={popMin} onChange={e=>{setPopMin(e.target.value);setPage(1)}}/><span style={{fontSize:10,color:"var(--muted)"}}>Max:</span><input className="search-inp" style={{width:70}} type="number" value={popMax} onChange={e=>{setPopMax(e.target.value);setPage(1)}}/></div>
+        {selIds.size>0&&<div style={{fontSize:11,color:"var(--muted)",marginBottom:6}}>Vybráno: <b style={{color:"var(--ink)"}}>{selIds.size}</b></div>}
+        <div className="vl-info"><span>{page}/{totalPages} · {pageItems.length}/{filtered.length}</span></div>
+        <div className="virtual-list">{pageItems.map(o=><div key={o.id} className={`assign-item ${selIds.has(o.id)?"sel":""}`} onClick={()=>toggle(o.id)}><div className="assign-item-check">{selIds.has(o.id)?"✓":""}</div><div style={{flex:1}}><div className="ai-main">{o.organization}</div><div className="ai-sub"><span className={`tag-type ${o.type==="Obec"?"tag-obec":""}`} style={{fontSize:9}}>{o.type}</span>{o.okres&&<span>📍 {o.okres}</span>}{o.contact&&<span>{o.contact}</span>}{o.type==="Obec"&&o.population>0&&<span style={{color:"var(--blue)"}}>{o.population.toLocaleString("cs-CZ")}</span>}</div></div></div>)}</div>
+        {totalPages>1&&<div className="pagination"><button className="btn-sm" disabled={page===1} onClick={()=>setPage(p=>p-1)}>←</button><span style={{fontSize:11,color:"var(--muted)"}}>{page}/{totalPages}</span><button className="btn-sm" disabled={page===totalPages} onClick={()=>setPage(p=>p+1)}>→</button></div>}
       </div>
-
       <div className="assign-right">
-        <div style={{fontWeight:700,fontSize:13,marginBottom:12}}>👤 Přiřadit obchodníkovi</div>
-        {salespeople.map(sp=>(
-          <div key={sp.id} className={`sp-pick ${targetSpId===sp.id?"sel":""}`} onClick={()=>setTargetSp(sp.id)}>
-            <span style={{fontSize:18}}>{sp.emoji}</span><span style={{fontWeight:600,fontSize:13}}>{sp.name}</span>
-          </div>
-        ))}
-        {selectedIds.size>0&&targetSpId&&<div style={{marginTop:12,padding:9,background:"var(--bg)",borderRadius:8,fontSize:11,color:"var(--muted)",marginBottom:8}}>
-          <b style={{color:"var(--ink)"}}>{selectedIds.size}</b> org. → <b style={{color:"var(--ink)"}}>{targetSp?.emoji} {targetSp?.name}</b>
-        </div>}
-        <button className="btn-green" style={{width:"100%",marginTop:8,padding:10,fontSize:13,opacity:(selectedIds.size>0&&targetSpId)?1:.35,cursor:(selectedIds.size>0&&targetSpId)?"pointer":"not-allowed"}}
-          onClick={assignOrgs} disabled={!selectedIds.size||!targetSpId}>
-          ✅ Přiřadit ({selectedIds.size})
-        </button>
+        <div style={{fontWeight:700,fontSize:12,marginBottom:10}}>👤 Přiřadit</div>
+        {salespeople.map(s=><div key={s.id} className={`sp-pick ${targetSp===s.id?"sel":""}`} onClick={()=>setTargetSp(s.id)}><span style={{fontSize:16}}>{s.emoji}</span><span style={{fontWeight:600,fontSize:12}}>{s.name}</span></div>)}
+        {selIds.size>0&&targetSp&&<div style={{margin:"10px 0",padding:"8px",background:"var(--bg)",borderRadius:8,fontSize:11,color:"var(--muted)"}}><b style={{color:"var(--ink)"}}>{selIds.size}</b> → <b style={{color:"var(--ink)"}}>{sp?.emoji} {sp?.name}</b></div>}
+        <button className="btn-green" style={{width:"100%",marginTop:8,padding:9,opacity:(selIds.size>0&&targetSp)?1:.35,cursor:(selIds.size>0&&targetSp)?"pointer":"not-allowed"}} onClick={assignOrgs} disabled={!selIds.size||!targetSp}>✅ Přiřadit ({selIds.size})</button>
       </div>
     </div>
   </div>)
 }
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(CRM));
+function init() {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(React.createElement(CRM));
+}
+if (window.fbApp) init();
+else window.addEventListener('fb-ready', init, {once:true});
   </script>
 </body>
 </html>
